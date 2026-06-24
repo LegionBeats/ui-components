@@ -71,7 +71,14 @@ function ComponentDetail() {
   const [pm, setPm] = useState<PackageManager>("bun");
   const [explainerOpen, setExplainerOpen] = useState(false);
   const pmCmd = installCommand(pm, entry.dependencies);
-  const aiTools: AiTool[] = ["lovable", "v0", "cursor", "claude-code", "emergent"];
+  const aiTools: AiTool[] = [
+    "lovable",
+    "v0",
+    "cursor",
+    "claude-code",
+    "emergent",
+    "google-ai-studio",
+  ];
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -91,6 +98,38 @@ function ComponentDetail() {
               </p>
               <h1 className="mt-1 text-3xl font-bold tracking-tight">{entry.name}</h1>
               <p className="mt-2 max-w-2xl text-muted-foreground">{entry.description}</p>
+              {(entry.author || entry.sourceUrl) && (
+                <p className="mt-2 text-xs text-muted-foreground">
+                  {entry.author && (
+                    <>
+                      Inspired by{" "}
+                      {entry.author.url ? (
+                        <a
+                          href={entry.author.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="underline hover:text-foreground"
+                        >
+                          {entry.author.name}
+                        </a>
+                      ) : (
+                        entry.author.name
+                      )}
+                    </>
+                  )}
+                  {entry.author && entry.sourceUrl && " · "}
+                  {entry.sourceUrl && (
+                    <a
+                      href={entry.sourceUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="underline hover:text-foreground"
+                    >
+                      View source
+                    </a>
+                  )}
+                </p>
+              )}
             </div>
           </div>
         </div>
