@@ -16,6 +16,8 @@ export type RegistryEntry = {
   files: RegistryFile[];
   Preview: ComponentType;
   sourceUrl?: string;
+  /** Credit for original author/site. */
+  author?: { name: string; url?: string };
   /** Optional one-line shadcn CLI install command, e.g.
    *  "npx shadcn@latest add https://registry.example.com/r/foo.json" */
   shadcnCommand?: string;
