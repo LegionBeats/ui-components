@@ -98,11 +98,28 @@ function ComponentDetail() {
         </div>
 
         {/* Install */}
+        {entry.shadcnCommand && (
+          <div>
+            <div className="mb-3 flex items-center justify-between">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+                Install with shadcn CLI
+              </h2>
+              <CopyButton value={entry.shadcnCommand} />
+            </div>
+            <pre className="overflow-x-auto rounded-xl border border-border bg-muted/30 px-4 py-3 text-sm">
+              <code>{entry.shadcnCommand}</code>
+            </pre>
+            <p className="mt-2 text-xs text-muted-foreground">
+              One-shot install — pulls files and dependencies into any shadcn-configured project.
+            </p>
+          </div>
+        )}
+
         {installCmd && (
           <div>
             <div className="mb-3 flex items-center justify-between">
               <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-                Install dependencies
+                Or install dependencies manually
               </h2>
               <CopyButton value={installCmd} />
             </div>
