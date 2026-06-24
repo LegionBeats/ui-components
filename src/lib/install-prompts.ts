@@ -8,13 +8,14 @@ export function installCommand(pm: PackageManager, deps: string[]): string {
   return `${pm} ${verb} ${deps.join(" ")}`;
 }
 
-export type AiTool = "lovable" | "v0" | "cursor" | "bolt";
+export type AiTool = "lovable" | "v0" | "cursor" | "claude-code" | "emergent";
 
 const toolLabels: Record<AiTool, string> = {
   lovable: "Lovable",
   v0: "v0",
   cursor: "Cursor",
-  bolt: "Bolt",
+  "claude-code": "Claude Code",
+  emergent: "Emergent",
 };
 
 export function aiToolLabel(tool: AiTool): string {
@@ -32,13 +33,12 @@ function filesBlock(entry: RegistryEntry): string {
 
 export function aiPrompt(tool: AiTool, entry: RegistryEntry): string {
   const deps = entry.dependencies.join(" ");
-  const header =
-    tool === "lovable"
-      ? `Add the "${entry.name}" component to my project. Install these dependencies with bun: ${deps}. Then create the following files exactly as shown:`
-      : tool === "v0"
-        ? `Create a new component called "${entry.name}". Dependencies: ${deps}. Files:`
-        : tool === "cursor"
-          ? `Please add this component to the project. Run \`npm install ${deps}\`, then create these files at the given paths:`
-          : `Add this component. Install: \`npm install ${deps}\`. Create these files:`;
-  return `${header}\n\n${filesBlock(entry)}`;
+  const headers: Record<AiTool, string> = {
+    lovable: `Add the "${entry.name}" component to my project. Install these dependencies with bun: ${deps}. Then create the following files exactly as shown:`,
+    v0: `Create a new component called "${entry.name}". Dependencies: ${deps}. Files:`,
+    cursor: `Please add this component to the project. Run \`npm install ${deps}\`, then create these files at the given paths:`,
+    "claude-code": `Add the "${entry.name}" component. Run \`npm install ${deps}\` (or the project's package manager equivalent), then create the following files at the exact paths shown:`,
+    emergent: `Add the "${entry.name}" component to this project. Install dependencies: ${deps}. Then create these files exactly as shown:`,
+  };
+  return `${headers[tool]}\n\n${filesBlock(entry)}`;
 }
