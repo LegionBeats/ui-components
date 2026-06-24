@@ -77,14 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Some nice UI Components" },
+      { name: "description", content: "A component library for storing and reusing UI elements across projects." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Some nice UI Components" },
+      { property: "og:description", content: "A component library for storing and reusing UI elements across projects." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Some nice UI Components" },
+      { name: "twitter:description", content: "A component library for storing and reusing UI elements across projects." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f2b41058-d69e-428b-b4e2-0a536ffcf1ea/id-preview-a3d38518--73d03000-baed-497a-94dc-623eabce141b.lovable.app-1782269991391.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f2b41058-d69e-428b-b4e2-0a536ffcf1ea/id-preview-a3d38518--73d03000-baed-497a-94dc-623eabce141b.lovable.app-1782269991391.png" },
     ],
     links: [
       {
