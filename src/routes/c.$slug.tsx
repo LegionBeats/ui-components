@@ -2,13 +2,12 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { Check, Copy, ArrowLeft } from "lucide-react";
 import { getEntry, registry } from "@/registry";
-import type { RegistryEntry } from "@/registry";
 
 export const Route = createFileRoute("/c/$slug")({
   loader: ({ params }) => {
-    const entry = getEntry(params.slug);
-    if (!entry) throw notFound();
-    return { entry };
+    const exists = registry.some((e) => e.slug === params.slug);
+    if (!exists) throw notFound();
+    return { slug: params.slug };
   },
   head: ({ params }) => {
     const entry = registry.find((e) => e.slug === params.slug);
@@ -54,7 +53,8 @@ function CopyButton({ value, label = "Copy" }: { value: string; label?: string }
 }
 
 function ComponentDetail() {
-  const { entry } = Route.useLoaderData() as { entry: RegistryEntry };
+  const { slug } = Route.useLoaderData();
+  const entry = getEntry(slug)!;
   const [activeFile, setActiveFile] = useState(entry.files[0].name);
   const file = entry.files.find((f) => f.name === activeFile) ?? entry.files[0];
 
