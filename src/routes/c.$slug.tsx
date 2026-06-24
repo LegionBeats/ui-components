@@ -71,7 +71,7 @@ function ComponentDetail() {
   const [pm, setPm] = useState<PackageManager>("bun");
   const [explainerOpen, setExplainerOpen] = useState(false);
   const pmCmd = installCommand(pm, entry.dependencies);
-  const aiTools: AiTool[] = ["lovable", "v0", "cursor", "bolt"];
+  const aiTools: AiTool[] = ["lovable", "v0", "cursor", "claude-code", "emergent"];
 
   return (
     <main className="min-h-screen bg-background text-foreground">
