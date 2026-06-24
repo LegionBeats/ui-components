@@ -25,5 +25,7 @@ export const morphingButton: RegistryEntry = {
     },
   ],
   Preview: MorphingButtonDemo,
+  shadcnCommand:
+    "npx shadcn@latest add https://registry.watermelon.sh/r/morphing-button.json",
   addedAt: "2026-06-24",
 };
