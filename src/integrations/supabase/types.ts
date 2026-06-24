@@ -14,7 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      pending_components: {
+        Row: {
+          created_at: string
+          id: string
+          note: string | null
+          status: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          note?: string | null
+          status?: string
+          url: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          note?: string | null
+          status?: string
+          url?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
