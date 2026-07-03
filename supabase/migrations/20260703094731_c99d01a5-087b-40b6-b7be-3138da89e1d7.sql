@@ -1,0 +1,1 @@
+ALTER TABLE public.pending_components ADD COLUMN IF NOT EXISTS type TEXT NOT NULL DEFAULT 'component' CHECK (type IN ('component','design'));
