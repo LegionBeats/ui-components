@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as DropUnlockRouteImport } from './routes/drop-unlock'
 import { Route as DropRouteImport } from './routes/drop'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DSlugRouteImport } from './routes/d.$slug'
 import { Route as CSlugRouteImport } from './routes/c.$slug'
 
 const DropUnlockRoute = DropUnlockRouteImport.update({
@@ -29,6 +30,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DSlugRoute = DSlugRouteImport.update({
+  id: '/d/$slug',
+  path: '/d/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CSlugRoute = CSlugRouteImport.update({
   id: '/c/$slug',
   path: '/c/$slug',
@@ -40,12 +46,14 @@ export interface FileRoutesByFullPath {
   '/drop': typeof DropRoute
   '/drop-unlock': typeof DropUnlockRoute
   '/c/$slug': typeof CSlugRoute
+  '/d/$slug': typeof DSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/drop': typeof DropRoute
   '/drop-unlock': typeof DropUnlockRoute
   '/c/$slug': typeof CSlugRoute
+  '/d/$slug': typeof DSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,14 @@ export interface FileRoutesById {
   '/drop': typeof DropRoute
   '/drop-unlock': typeof DropUnlockRoute
   '/c/$slug': typeof CSlugRoute
+  '/d/$slug': typeof DSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/drop' | '/drop-unlock' | '/c/$slug'
+  fullPaths: '/' | '/drop' | '/drop-unlock' | '/c/$slug' | '/d/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/drop' | '/drop-unlock' | '/c/$slug'
-  id: '__root__' | '/' | '/drop' | '/drop-unlock' | '/c/$slug'
+  to: '/' | '/drop' | '/drop-unlock' | '/c/$slug' | '/d/$slug'
+  id: '__root__' | '/' | '/drop' | '/drop-unlock' | '/c/$slug' | '/d/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +76,7 @@ export interface RootRouteChildren {
   DropRoute: typeof DropRoute
   DropUnlockRoute: typeof DropUnlockRoute
   CSlugRoute: typeof CSlugRoute
+  DSlugRoute: typeof DSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/d/$slug': {
+      id: '/d/$slug'
+      path: '/d/$slug'
+      fullPath: '/d/$slug'
+      preLoaderRoute: typeof DSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/c/$slug': {
       id: '/c/$slug'
       path: '/c/$slug'
@@ -107,17 +124,8 @@ const rootRouteChildren: RootRouteChildren = {
   DropRoute: DropRoute,
   DropUnlockRoute: DropUnlockRoute,
   CSlugRoute: CSlugRoute,
+  DSlugRoute: DSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

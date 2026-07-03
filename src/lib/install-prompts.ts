@@ -1,4 +1,5 @@
 import type { RegistryEntry } from "@/registry/types";
+import type { DesignEntry } from "@/registry/designs/types";
 
 export type PackageManager = "bun" | "npm" | "pnpm" | "yarn";
 
@@ -49,4 +50,20 @@ export function aiPrompt(tool: AiTool, entry: RegistryEntry): string {
     "google-ai-studio": `I want to add the "${entry.name}" React component to my project. First, run \`npm install ${deps}\` to install the required dependencies. Then create each of the following files at the exact path shown, using the contents provided verbatim:`,
   };
   return `${headers[tool]}\n\n${filesBlock(entry)}`;
+}
+
+export function aiDesignPrompt(tool: AiTool, entry: DesignEntry): string {
+  const promptBlock = entry.prompt
+    ? `\n\n---\n\n${entry.prompt.source}`
+    : "";
+  const source = entry.sourceUrl ? ` (source: ${entry.sourceUrl})` : "";
+  const headers: Record<AiTool, string> = {
+    lovable: `Restyle my current project to match the "${entry.name}" design system${source}. Apply the palette, typography, spacing, radii, and overall visual language described below to the existing pages and components — don't add new pages. Use design tokens in src/styles.css rather than hardcoded values.${promptBlock}`,
+    v0: `Use this design system spec as the visual language for the component you generate next${source}.${promptBlock}`,
+    cursor: `Apply the following design system to this project. Update the Tailwind theme / CSS tokens and refactor existing components to match. Do not add new pages.${promptBlock}`,
+    "claude-code": `Apply this design system to the current project. Update the theme tokens (colors, typography, spacing, radii, shadows) and adjust existing components to match. Keep the routes and content unchanged.${promptBlock}`,
+    emergent: `Restyle this project to match the "${entry.name}" design system${source}. Update tokens and refactor existing components — no new pages.${promptBlock}`,
+    "google-ai-studio": `I'm going to give you a design system spec. Use it as the visual language for a React + Tailwind project: derive the color tokens, typography scale, spacing, radii, and component styles from it and describe how you would apply them.${promptBlock}`,
+  };
+  return headers[tool];
 }

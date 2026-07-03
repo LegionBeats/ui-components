@@ -22,6 +22,7 @@ type PendingRow = {
   note: string | null;
   status: string;
   created_at: string;
+  type?: string;
 };
 
 function extractUrl(input: string): string {
@@ -36,6 +37,9 @@ function extractUrl(input: string): string {
   if (shad && shad[1].includes("/") && !shad[1].startsWith("http")) {
     return `https://21st.dev/r/${shad[1]}`;
   }
+  // getdesign.md CLI shorthand: `npx getdesign@latest add framer`
+  const gd = trimmed.match(/getdesign(?:@\S+)?\s+add\s+([^\s]+)/);
+  if (gd) return `https://getdesign.md/${gd[1]}/design-md`;
   return trimmed;
 }
 
@@ -44,6 +48,7 @@ function ImporterPage() {
   const lock = useServerFn(lockDrop);
   const [input, setInput] = useState("");
   const [note, setNote] = useState("");
+  const [type, setType] = useState<"component" | "design">("component");
   const [rows, setRows] = useState<PendingRow[]>([]);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -52,7 +57,7 @@ function ImporterPage() {
   async function load() {
     const { data, error } = await supabase
       .from("pending_components")
-      .select("id, url, note, status, created_at")
+      .select("id, url, note, status, created_at, type")
       .order("created_at", { ascending: false })
       .limit(100);
     if (error) {
@@ -72,7 +77,7 @@ function ImporterPage() {
     const url = extractUrl(input);
     if (!/^https?:\/\//.test(url)) {
       setError(
-        "Couldn't find a URL. Paste a full https:// link, or a CLI command like `npx shadcn add https://...` or `npx @21st-dev/cli add author/name`."
+        "Couldn't find a URL. Paste a full https:// link, or a CLI command like `npx shadcn add https://...`, `npx @21st-dev/cli add author/name`, or `npx getdesign@latest add framer`."
       );
       return;
     }
@@ -80,6 +85,7 @@ function ImporterPage() {
     const { error } = await supabase.from("pending_components").insert({
       url,
       note: note.trim() || null,
+      type,
     });
     setSaving(false);
     if (error) {
@@ -111,17 +117,39 @@ function ImporterPage() {
         </div>
         <h1 className="mt-2 text-3xl font-semibold">Component Queue</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Paste a link to any shadcn-format component (e.g. from 21st.dev). It saves
-          to the queue. Next time you chat with the AI, ask it to "process the queue"
-          and it'll add them to the site.
+          Paste a link to a component (shadcn / 21st.dev) or a design system
+          (getdesign.md). It saves to the queue. Next time you chat with the AI,
+          ask it to "process the queue" and it'll add them to the site.
         </p>
 
         <div className="mt-6 space-y-3 rounded-lg border bg-card p-4">
+          <div>
+            <label className="mb-1 block text-sm font-medium">Type</label>
+            <div className="inline-flex rounded-md border border-border bg-muted/30 p-1">
+              {(["component", "design"] as const).map((t) => (
+                <button
+                  key={t}
+                  onClick={() => setType(t)}
+                  className={`rounded px-3 py-1 text-xs font-medium capitalize transition-colors ${
+                    type === t
+                      ? "bg-background text-foreground shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {t}
+                </button>
+              ))}
+            </div>
+          </div>
           <label className="block text-sm font-medium">Link or command</label>
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="https://21st.dev/r/author/name  —or—  npx shadcn@latest add https://..."
+            placeholder={
+              type === "design"
+                ? "https://getdesign.md/framer/design-md  —or—  npx getdesign@latest add framer"
+                : "https://21st.dev/r/author/name  —or—  npx shadcn@latest add https://..."
+            }
             className="w-full rounded-md border bg-background px-3 py-2 text-sm font-mono"
             rows={2}
           />
@@ -160,16 +188,23 @@ function ImporterPage() {
                     >
                       {r.url}
                     </a>
-                    <span
-                      className={
-                        "shrink-0 rounded px-2 py-0.5 text-xs " +
-                        (r.status === "done"
-                          ? "bg-green-500/15 text-green-600"
-                          : "bg-muted text-muted-foreground")
-                      }
-                    >
-                      {r.status}
-                    </span>
+                    <div className="flex shrink-0 items-center gap-1.5">
+                      {r.type && r.type !== "component" && (
+                        <span className="rounded bg-blue-500/15 px-2 py-0.5 text-xs text-blue-600">
+                          {r.type}
+                        </span>
+                      )}
+                      <span
+                        className={
+                          "rounded px-2 py-0.5 text-xs " +
+                          (r.status === "done"
+                            ? "bg-green-500/15 text-green-600"
+                            : "bg-muted text-muted-foreground")
+                        }
+                      >
+                        {r.status}
+                      </span>
+                    </div>
                   </div>
                   {r.note && (
                     <p className="mt-1 text-xs text-muted-foreground">{r.note}</p>
