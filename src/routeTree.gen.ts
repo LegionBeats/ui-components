@@ -9,13 +9,13 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AdminX7k2RouteImport } from './routes/admin-x7k2'
+import { Route as DropRouteImport } from './routes/drop'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CSlugRouteImport } from './routes/c.$slug'
 
-const AdminX7k2Route = AdminX7k2RouteImport.update({
-  id: '/admin-x7k2',
-  path: '/admin-x7k2',
+const DropRoute = DropRouteImport.update({
+  id: '/drop',
+  path: '/drop',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -31,41 +31,41 @@ const CSlugRoute = CSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin-x7k2': typeof AdminX7k2Route
+  '/drop': typeof DropRoute
   '/c/$slug': typeof CSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin-x7k2': typeof AdminX7k2Route
+  '/drop': typeof DropRoute
   '/c/$slug': typeof CSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin-x7k2': typeof AdminX7k2Route
+  '/drop': typeof DropRoute
   '/c/$slug': typeof CSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin-x7k2' | '/c/$slug'
+  fullPaths: '/' | '/drop' | '/c/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin-x7k2' | '/c/$slug'
-  id: '__root__' | '/' | '/admin-x7k2' | '/c/$slug'
+  to: '/' | '/drop' | '/c/$slug'
+  id: '__root__' | '/' | '/drop' | '/c/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminX7k2Route: typeof AdminX7k2Route
+  DropRoute: typeof DropRoute
   CSlugRoute: typeof CSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/admin-x7k2': {
-      id: '/admin-x7k2'
-      path: '/admin-x7k2'
-      fullPath: '/admin-x7k2'
-      preLoaderRoute: typeof AdminX7k2RouteImport
+    '/drop': {
+      id: '/drop'
+      path: '/drop'
+      fullPath: '/drop'
+      preLoaderRoute: typeof DropRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -87,7 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminX7k2Route: AdminX7k2Route,
+  DropRoute: DropRoute,
   CSlugRoute: CSlugRoute,
 }
 export const routeTree = rootRouteImport

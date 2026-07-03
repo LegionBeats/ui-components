@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/admin-x7k2")({
+export const Route = createFileRoute("/drop")({
   head: () => ({
     meta: [
       { title: "Component Queue" },
