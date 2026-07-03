@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as DropUnlockRouteImport } from './routes/drop-unlock'
 import { Route as DropRouteImport } from './routes/drop'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CSlugRouteImport } from './routes/c.$slug'
 
+const DropUnlockRoute = DropUnlockRouteImport.update({
+  id: '/drop-unlock',
+  path: '/drop-unlock',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DropRoute = DropRouteImport.update({
   id: '/drop',
   path: '/drop',
@@ -32,35 +38,46 @@ const CSlugRoute = CSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/drop': typeof DropRoute
+  '/drop-unlock': typeof DropUnlockRoute
   '/c/$slug': typeof CSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/drop': typeof DropRoute
+  '/drop-unlock': typeof DropUnlockRoute
   '/c/$slug': typeof CSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/drop': typeof DropRoute
+  '/drop-unlock': typeof DropUnlockRoute
   '/c/$slug': typeof CSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/drop' | '/c/$slug'
+  fullPaths: '/' | '/drop' | '/drop-unlock' | '/c/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/drop' | '/c/$slug'
-  id: '__root__' | '/' | '/drop' | '/c/$slug'
+  to: '/' | '/drop' | '/drop-unlock' | '/c/$slug'
+  id: '__root__' | '/' | '/drop' | '/drop-unlock' | '/c/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DropRoute: typeof DropRoute
+  DropUnlockRoute: typeof DropUnlockRoute
   CSlugRoute: typeof CSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/drop-unlock': {
+      id: '/drop-unlock'
+      path: '/drop-unlock'
+      fullPath: '/drop-unlock'
+      preLoaderRoute: typeof DropUnlockRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/drop': {
       id: '/drop'
       path: '/drop'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DropRoute: DropRoute,
+  DropUnlockRoute: DropUnlockRoute,
   CSlugRoute: CSlugRoute,
 }
 export const routeTree = rootRouteImport
