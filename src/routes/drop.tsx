@@ -1,8 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { useRouter } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
+import { requireDropUnlocked, lockDrop } from "@/lib/drop-gate.functions";
 
 export const Route = createFileRoute("/drop")({
+  loader: () => requireDropUnlocked(),
   head: () => ({
     meta: [
       { title: "Component Queue" },
@@ -36,6 +40,8 @@ function extractUrl(input: string): string {
 }
 
 function ImporterPage() {
+  const router = useRouter();
+  const lock = useServerFn(lockDrop);
   const [input, setInput] = useState("");
   const [note, setNote] = useState("");
   const [rows, setRows] = useState<PendingRow[]>([]);
@@ -89,9 +95,20 @@ function ImporterPage() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-2xl px-6 py-12">
-        <Link to="/" className="text-sm text-muted-foreground hover:underline">
-          ← Home
-        </Link>
+        <div className="flex items-center justify-between">
+          <Link to="/" className="text-sm text-muted-foreground hover:underline">
+            ← Home
+          </Link>
+          <button
+            onClick={async () => {
+              await lock();
+              await router.navigate({ to: "/drop-unlock" });
+            }}
+            className="text-xs text-muted-foreground hover:underline"
+          >
+            Lock
+          </button>
+        </div>
         <h1 className="mt-2 text-3xl font-semibold">Component Queue</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Paste a link to any shadcn-format component (e.g. from 21st.dev). It saves
