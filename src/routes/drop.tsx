@@ -21,8 +21,18 @@ type PendingRow = {
 };
 
 function extractUrl(input: string): string {
-  const m = input.match(/https?:\/\/\S+/);
-  return m ? m[0] : input.trim();
+  const trimmed = input.trim();
+  const httpMatch = trimmed.match(/https?:\/\/\S+/);
+  if (httpMatch) return httpMatch[0];
+  // 21st.dev CLI shorthand: `npx @21st-dev/cli add author/name`
+  const t21 = trimmed.match(/@21st-dev\/cli\s+add\s+([^\s]+)/);
+  if (t21) return `https://21st.dev/r/${t21[1]}`;
+  // shadcn CLI without URL: `npx shadcn add author/name` → assume 21st.dev
+  const shad = trimmed.match(/shadcn(?:@\S+)?\s+add\s+([^\s]+)/);
+  if (shad && shad[1].includes("/") && !shad[1].startsWith("http")) {
+    return `https://21st.dev/r/${shad[1]}`;
+  }
+  return trimmed;
 }
 
 function ImporterPage() {
@@ -55,7 +65,9 @@ function ImporterPage() {
     setSuccess(null);
     const url = extractUrl(input);
     if (!/^https?:\/\//.test(url)) {
-      setError("Please paste a valid URL or an `npx shadcn add <url>` command.");
+      setError(
+        "Couldn't find a URL. Paste a full https:// link, or a CLI command like `npx shadcn add https://...` or `npx @21st-dev/cli add author/name`."
+      );
       return;
     }
     setSaving(true);
