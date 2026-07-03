@@ -1,30 +1,87 @@
-# Password-gate `/drop`
 
-Small, ~10 min of work. One shared password everyone who's allowed to drop links uses. No accounts, no login UI beyond a single password field.
+# Add a Designs section
 
-## How it works
+Same site, second collection. Designs are a sibling of components: same drop-and-process flow, same detail-page pattern, tuned for what a design entry actually is.
 
-1. First visit to `/drop` → redirected to `/drop-unlock`.
-2. Type the password → server checks it → sets an encrypted cookie that lasts 7 days.
-3. `/drop` works normally after that. No re-prompting unless the cookie expires or the user clears cookies.
+## What a design entry contains
 
-The password lives in a server-only environment variable (`DROP_PASSWORD`). It never ships to the browser. The check runs on the server with a timing-safe comparison.
+- **Name** (e.g. "Framer")
+- **Description** (one-line summary)
+- **Source URL** (e.g. `https://getdesign.md/framer/design-md`)
+- **Author/credit** (optional)
+- **Screenshot** — the preview image (stored as a Lovable asset)
+- **Prompt file** — the `.md` file (stored as text in the registry entry, shown in a code viewer, copy-to-clipboard, and downloadable as `<name>.md`)
+- **CLI command** (e.g. `npx getdesign@latest add framer`)
+- **Tool** it targets (Framer / Figma / generic / etc.) — a simple tag
 
-## What I'll build
+Both `prompt` and `cli` are optional so a design can be just "screenshot + link + credit" if that's all you have.
 
-- **Two secrets**: `DROP_PASSWORD` (the password you choose) and `SESSION_SECRET` (a random 32+ char string I'll generate to encrypt the cookie). I'll prompt you for the password value via the secrets tool.
-- **`src/lib/drop-gate.functions.ts`** — three server functions: `unlockDrop({ password })`, `lockDrop()`, and an internal `requireDropUnlocked()` helper the `/drop` loader calls.
-- **`src/routes/drop-unlock.tsx`** — a minimal page with one password input and a submit button. Wrong password shows "Incorrect password".
-- **`src/routes/drop.tsx`** — add a `loader` that calls `requireDropUnlocked()`. If locked, it throws a redirect to `/drop-unlock`. Also add a small "Lock" button in the corner that calls `lockDrop()` and redirects back to the unlock page.
+## Pages
 
-## Tradeoffs (honest)
+- **`/` (home)** — add a top-level toggle: **Components | Designs**. Components view is what's there today. Designs view is a grid of screenshot cards (image on top, name + tool tag + credit below).
+- **`/d/$slug`** — design detail page. Layout mirrors `/c/$slug`:
+  - Big screenshot preview at the top.
+  - Credit + source link.
+  - **CLI command** block (copy button) — only if present.
+  - **Prompt** tab with the full `.md` in a code viewer, copy button, and a **Download `.md`** button.
+  - **Copy for AI** row using the same six tools (Lovable, v0, Cursor, Claude Code, Emergent, Google AI Studio) — the prompt for a design says "use this design system spec to style the current project" and pastes the `.md` content inline.
+- **`/drop`** — same page, gains a small **Type** toggle (Component / Design) at the top of the form. Same password gate, same queue. Design drops accept the same freeform input (URL, or CLI like `npx getdesign@latest add framer`).
 
-- **Shared password**: everyone uses the same one. You can't revoke a single person — if the password leaks, you change it (update the secret, everyone re-enters).
-- **Not real auth**: it's a gate, not user accounts. Perfect for "just me and 2 friends can add stuff".
-- **Cookie is per-browser**: your friend on their phone will type the password once on that phone, once on their laptop, etc. Lasts 7 days each.
+## Drop → queue → process
 
-## What I need from you
+- Add a `type` column to `pending_components` (`'component' | 'design'`, defaults to `'component'` so existing rows are unaffected).
+- `/drop` sets `type` based on the toggle. URL parsing also learns:
+  - `npx getdesign@latest add <name>` → `https://getdesign.md/<name>/design-md`
+  - Any `getdesign.md` URL is auto-classified as `design` even if the toggle is wrong.
+- **Processing designs** stays the same shape as components: you say "process the queue" and I fetch the source page, pull the screenshot + prompt `.md` + CLI, save the image as a Lovable asset, write a registry entry, and mark the row done.
 
-- The password you want to use (I'll ask via the secrets form so it never appears in chat).
+## Registry structure
 
-That's it. Ready when you are.
+Mirror the component registry so designs are self-contained and portable:
+
+```
+src/registry/designs/
+  index.ts                 → exports designRegistry[] + getDesign(slug)
+  types.ts                 → DesignEntry type
+  entries/framer/
+    index.ts               → the DesignEntry
+    prompt.md              → the raw prompt file (imported ?raw)
+    screenshot.png.asset.json  → Lovable asset pointer
+```
+
+`DesignEntry` shape:
+
+```ts
+type DesignEntry = {
+  slug: string;
+  name: string;
+  description: string;
+  tool?: string;                // "Framer", "Figma", "Generic", ...
+  sourceUrl?: string;
+  author?: { name: string; url?: string };
+  screenshotUrl: string;        // from the .asset.json
+  prompt?: { filename: string; source: string };  // the .md
+  cliCommand?: string;          // "npx getdesign@latest add framer"
+  addedAt: string;
+};
+```
+
+Adding to another Lovable project later = copy the `entries/framer/` folder + register it, exactly like components today.
+
+## What I'll build in this pass
+
+1. Migration: add `type` column to `pending_components` (default `'component'`).
+2. Registry scaffolding: `src/registry/designs/{types.ts,index.ts}`.
+3. First entry: **Framer** — using the screenshot and `.md` you already uploaded, source URL `https://getdesign.md/framer/design-md`, CLI `npx getdesign@latest add framer`.
+4. Home page: Components/Designs toggle + designs grid.
+5. `/d/$slug` detail route with preview, prompt viewer, copy/download, CLI, Copy-for-AI.
+6. `/drop` gains the type toggle and the getdesign URL/CLI parsing.
+7. Nav link from `/` to switch views; `/drop` mentions both types.
+
+## Non-goals (for now)
+
+- No editing designs from the UI — same as components, adds happen via `/drop` + "process".
+- No search or filtering beyond the top-level Components/Designs toggle.
+- No per-design tags beyond the single `tool` field.
+
+If any of this is more (or less) than you want, tell me and I'll revise before building.
