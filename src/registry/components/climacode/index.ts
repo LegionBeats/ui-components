@@ -32,8 +32,7 @@ export const climacode: RegistryEntry = {
     },
   ],
   Preview: ClimacodeDemo,
-  sourceUrl:
-    "https://gist.github.com/LegionBeats/9bf6a7f11fd0ab1845178bb7c3816741",
-  author: { name: "@LegionBeats", url: "https://gist.github.com/LegionBeats" },
+  sourceUrl: "https://codepen.io/RAFA3L/pen/ZEmBzEv",
+  author: { name: "RAFA3L", url: "https://codepen.io/RAFA3L" },
   addedAt: "2026-07-09",
 };
