@@ -22,7 +22,7 @@ export default function VisualizerButton({
   const [levels, setLevels] = React.useState<number[]>(Array(5).fill(0))
 
   React.useEffect(() => {
-    let interval: NodeJS.Timer
+    let interval: ReturnType<typeof setInterval> | undefined
     if (isPlaying) {
       interval = setInterval(() => {
         setLevels(levels.map(() => Math.random() * height))
