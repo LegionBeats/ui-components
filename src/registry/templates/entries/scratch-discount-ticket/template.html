@@ -1,0 +1,796 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111">
+
+
+
+  
+    <title>Scratch Discount Ticket Animation</title>
+
+    <link rel="canonical" href="https://codepen.io/blacklead-studio/pen/JoPzjVK">
+  
+  
+  
+  
+<style>
+@font-face {
+  font-family: "tomato";
+  src: url("http://img.blaclead.work/TomatoGrotesk-Regular.woff2")
+      format("woff2"),
+    url("http://img.blaclead.work/TomatoGrotesk-Regular.woff") format("woff");
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+  background: #000;
+}
+
+body,
+main {
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--main-font);
+  font-size: 16px;
+  line-height: 20px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+main {
+  overflow: hidden;
+  background: #000;
+  background-size: 100% 100%;
+  height: calc(var(--vh, 1vh) * 100);
+}
+
+a {
+  text-decoration: none;
+  outline: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+section {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  width: var(--container-width);
+  min-width: var(--container-width);
+  margin: 0 auto;
+}
+
+button {
+  cursor: pointer;
+}
+
+.desctop {
+  display: flex;
+}
+
+.mobile {
+  display: none;
+}
+
+header {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 15px 39px 0;
+  z-index: 1;
+}
+header span {
+  color: #fff;
+}
+header .diargam {
+  width: 47px;
+}
+header a img {
+  width: 67px;
+}
+header .vilk {
+  width: 58px;
+}
+
+.cursorr {
+  position: absolute;
+  pointer-events: none;
+  z-index: 444;
+  transform: translate(15%, 0%);
+  top: 100px;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
+.hero-section {
+  display: flex;
+  width: 100%;
+  height: calc(var(--vh, 1vh) * 100);
+  justify-content: center;
+  align-items: center;
+}
+.hero-section .fromcanvas {
+  display: flex;
+  width: 700px;
+  height: 550px;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  opacity: 0;
+  transition: all 0.4s ease-in-out;
+  transition-delay: 0.5s;
+  z-index: 2;
+}
+.hero-section .fromcanvas canvas {
+  display: flex;
+  z-index: 1;
+  width: 700px;
+  height: 550px;
+}
+.hero-section .fromcanvas canvas.hide {
+  pointer-events: none;
+}
+.hero-section .fromcanvas .frog {
+  position: absolute;
+  width: 210px;
+}
+.hero-section .fromcanvas .gotoform {
+  font-size: 17px;
+  line-height: 42px;
+  color: #fff;
+  position: absolute;
+  text-transform: uppercase;
+}
+.hero-section .fromcanvas .gotoform img {
+  width: 700px;
+  height: 550px;
+}
+.hero-section .fromcanvas .gotoform.show {
+  z-index: 1;
+  pointer-events: visible;
+}
+.hero-section .fromcanvas h2 {
+  font-size: 32px;
+  line-height: 42px;
+  font-weight: 400;
+}
+.hero-section .fromcanvas.active {
+  opacity: 1;
+}
+
+#three-container {
+  display: flex;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+}
+
+.footer {
+  display: flex;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-left {
+  display: flex;
+  margin: 100px 0 0 39px;
+  gap: 14px;
+}
+.footer-left a {
+  display: flex;
+  position: relative;
+  font-family: "tomato", sans-serif;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+.footer-left a::after {
+  content: "";
+  display: flex;
+  width: 100%;
+  height: 1px;
+  bottom: -6px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  position: absolute;
+  background: #fff;
+}
+.footer-left a:hover::after {
+  opacity: 1;
+}
+.footer-right {
+  display: flex;
+  margin: 0 39px 0 0;
+}
+.footer-right a {
+  display: flex;
+}
+.footer-right a img {
+  width: 259px;
+  transition: all 0.3s ease-in-out;
+}
+.footer-right a .hover {
+  position: absolute;
+  opacity: 0;
+}
+.footer-right a:hover .default {
+  opacity: 0;
+}
+.footer-right a:hover .hover {
+  opacity: 1;
+}
+
+.fromloader {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  position: fixed;
+  z-index: 5;
+  transition: all 0.8s ease-in-out;
+}
+.fromloader.active {
+  transform: translateY(-200%);
+}
+.fromloader.close {
+  display: none;
+}
+
+.Loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 700px;
+  height: 100%;
+  max-width: 700px;
+  z-index: 10;
+  position: absolute;
+  transform: scale(0.5);
+}
+.Loader:before,
+.Loader:after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  filter: drop-shadow(0 0 75px rgba(255, 255, 255, 0.75));
+}
+.Loader:before {
+  width: 100%;
+  padding-bottom: 100%;
+  box-shadow: inset 0 0 0 170px #fff;
+  animation-name: pulsA;
+}
+.Loader:after {
+  width: calc(100% - 2.4rem);
+  padding-bottom: calc(100% - 2.4rem);
+  box-shadow: 0 0 0 0 #fff;
+  animation-name: pulsB;
+}
+
+@keyframes pulsA {
+  0% {
+    box-shadow: inset 0 0 0 1.2rem #fff;
+    opacity: 1;
+  }
+  50%,
+  100% {
+    box-shadow: inset 0 0 0 0 #fff;
+    opacity: 0;
+  }
+}
+
+@keyframes pulsB {
+  0%,
+  50% {
+    box-shadow: 0 0 0 0 #fff;
+    opacity: 0;
+  }
+  100% {
+    box-shadow: 0 0 0 1.2rem #fff;
+    opacity: 1;
+  }
+}
+
+@media all and (max-width: 480px) {
+  .desctop {
+    display: none;
+  }
+  .mobile {
+    display: flex;
+  }
+  .hero-section .fromcanvas {
+    width: 600px;
+    height: 450px;
+  }
+  .hero-section .fromcanvas canvas {
+    width: 600px;
+    height: 450px;
+  }
+  .hero-section .fromcanvas .gotoform img {
+    width: 600px;
+    height: 450px;
+  }
+  .cursorr {
+    transform: translate(-35%, -35%);
+  }
+  header {
+    padding: 40px 18px 0;
+  }
+  .footer {
+    background: linear-gradient(180deg, transparent 0%, #000 100%);
+  }
+  .footer-left {
+    width: 110px;
+    flex-wrap: wrap;
+    margin: 20px 0 0 18px;
+  }
+  .footer-right {
+    width: 202px;
+    margin: 0 18px 0 0;
+  }
+  .footer-right a img {
+    width: 202px;
+  }
+  .footer-right a:hover .default {
+    opacity: 1;
+  }
+  .footer-right a:hover .hover {
+    opacity: 0;
+  }
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <main class="home">
+  <div class="fromloader">
+    <div class="Loader"></div>
+  </div>
+  <header>
+    <img class="diargam" src="https://img.blacklead.work/left-head.svg" alt="decor">
+    <a href="https://blacklead.studio/">
+      <img src="https://img.blacklead.work/logo-center.svg" alt="logo">
+    </a>
+    <img class="vilk" src="https://img.blacklead.work/right-head.svg" alt="decor">
+  </header>
+  <section class="hero-section">
+    <div class="fromcanvas">
+      <img class="cursorr" src="https://img.blacklead.work/monetka.webp" alt="coin">
+      <canvas id="canvas" width="1200px" height="900px"></canvas>
+      <a class="desc-1 gotoform">
+        <img class="desctop" src="https://img.blacklead.work/rotatecardNEWshadow.webp" alt="ticket">
+        <img class="mobile" src="https://img.blacklead.work/rotatecardNEWmobileshadow.webp" alt="ticket">
+      </a>
+    </div>
+  </section>
+  <div id="three-container" class="three-container">
+    <canvas id="canvas3D" data-engine="three.js r172" width="1280" height="900" style="width: 1280px; height: 900px;"></canvas>
+  </div>
+  <footer class="footer">
+    <div class="footer-left">
+      <a class="desc-1 up-text" target="_blank" href="https://www.behance.net/BL_S">[ Be ]</a>
+      <a class="desc-1 up-text" target="_blank" href="https://www.instagram.com/blacklead.studio/">[ Ig ]</a>
+      <a class="desc-1 up-text" target="_blank" href="https://dribbble.com/blacklead-studio">[ DB ]</a>
+      <a class="desc-1 up-text" target="_blank" href="https://www.linkedin.com/company/blacklead-studio">[ ln ]</a>
+    </div>
+    <div class="footer-right">
+      <a class="desc-1" target="_blank" href="https://calendly.com/blacklead-studio/bls-design-meet">
+        <img class="default" src="https://img.blacklead.work/CTA.svg" alt="cta">
+        <img class="hover" src="https://img.blacklead.work/CTAhover.svg" alt="cta">
+      </a>
+    </div>
+  </footer>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  
+    <script id="rendered-js" type="module">
+console.clear();
+import * as THREE from "https://esm.sh/three@0.172.0/build/three.module.js";
+import { GLTFLoader } from "https://esm.sh/three@0.172.0/examples/jsm/loaders/GLTFLoader.js";
+
+document.addEventListener("DOMContentLoaded", function () {
+  function setupHeroSection() {
+    var preloader = document.querySelector(".fromloader");
+    var blockFromMagic = document.querySelector(".fromcanvas");
+
+    setTimeout(function () {
+      preloader.classList.add("active");
+      blockFromMagic.classList.add("active");
+    }, 3000);
+
+    setTimeout(function () {
+      preloader.classList.add("close");
+    }, 4000);
+  }
+
+  function onloadSetHeroSection() {
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+    var isDrawing = false;
+    var backgroundImage = new Image();
+    var isBackgroundDrawn = false;
+    var isPictureDrawn = false;
+    var erasePercentage = 0.75;
+
+    var screenWidth = window.innerWidth;
+    var screenWidth = window.innerWidth;
+    backgroundImage.crossOrigin = "Anonymous";
+    backgroundImage.src =
+    screenWidth > 480 ?
+    "https://img.blacklead.work/rotatecardNEW2.webp" :
+    "https://img.blacklead.work/rotatecardNEW2mobile.webp";
+
+    backgroundImage.onload = function () {
+      drawBackground();
+    };
+    canvas.addEventListener("mousedown", startDrawing);
+    canvas.addEventListener("mousemove", draw);
+    canvas.addEventListener("mouseup", stopDrawing);
+
+    canvas.addEventListener("touchstart", startDrawing);
+    canvas.addEventListener("touchmove", draw);
+    canvas.addEventListener("touchend", stopDrawing);
+
+    function getMousePos(event) {
+      var rect = canvas.getBoundingClientRect();
+      var scaleX = canvas.width / rect.width;
+      var scaleY = canvas.height / rect.height;
+      return {
+        x: (event.clientX - rect.left) * scaleX,
+        y: (event.clientY - rect.top) * scaleY };
+
+    }
+    function getTouchPos(event) {
+      var rect = canvas.getBoundingClientRect();
+      var scaleX = canvas.width / rect.width;
+      var scaleY = canvas.height / rect.height;
+      var touch = event.touches[0];
+      return {
+        x: (touch.clientX - rect.left) * scaleX,
+        y: (touch.clientY - rect.top) * scaleY };
+
+    }
+    function startDrawing(event) {
+      event.preventDefault();
+      isDrawing = true;
+      if (!isBackgroundDrawn) {
+        drawBackground();
+        isBackgroundDrawn = true;
+      }
+    }
+    function draw(event) {
+      event.preventDefault();
+      var pos = event.type.startsWith("touch") ?
+      getTouchPos(event) :
+      getMousePos(event);
+
+      if (isDrawing) {
+        drawBrush(pos);
+      }
+    }
+    function stopDrawing() {
+      isDrawing = false;
+      checkPictureDrawn();
+    }
+    function drawBrush(position) {
+      context.globalCompositeOperation = "destination-out";
+      context.fillStyle = "rgba(0, 0, 0, 1)";
+      context.beginPath();
+      context.arc(position.x, position.y, 22, 0, 2 * Math.PI);
+      context.fill();
+
+      var cursor = document.querySelector(".cursorr");
+      var fontSizeInPx = 100;
+      var remValueX = position.x / 2 + "px";
+      var remValueY = position.y / 2 + "px";
+      cursor.style.left = remValueX;
+      cursor.style.top = remValueY;
+    }
+    function drawBackground() {
+      var centerX = canvas.width / 2;
+      var centerY = canvas.height / 2;
+      var imageX = centerX - backgroundImage.width / 2;
+      var imageY = centerY - backgroundImage.height / 2;
+      context.drawImage(backgroundImage, imageX, imageY);
+    }
+    function checkPictureDrawn() {
+      var imageData = context.getImageData(
+      0,
+      0,
+      canvas.width,
+      canvas.height).
+      data;
+      var totalPixels = imageData.length / 4;
+      var erasedPixels = 0;
+
+      for (var i = 0; i < imageData.length; i += 4) {
+        if (imageData[i] === 0) {
+          erasedPixels++;
+        }
+      }
+
+      var erasedPerc = erasedPixels / totalPixels;
+      if (erasedPerc >= erasePercentage && !isPictureDrawn) {
+        isPictureDrawn = true;
+        pictureDrawn();
+      }
+    }
+
+    var backCanvas = document.getElementById("canvas3D");
+    var jsConfetti = new JSConfetti({ backCanvas });
+
+    function pictureDrawn() {
+      jsConfetti.addConfetti({
+        emojis: ["🖤", "👾", "⚡️", "💣", "😈", "🌟"],
+        confettiNumber: 100,
+        confettiRadius: 36 });
+
+      console.log("The picture is drawn at " + erasePercentage * 100 + "%");
+    }
+
+    var scene = new THREE.Scene();
+
+    var loader = new GLTFLoader();
+    var mesh1;
+    var modelPath = "";
+
+    if (screenWidth > 480) {
+      modelPath = "https://img.blacklead.work/rockLPoly.glb";
+    } else {
+      modelPath = "https://img.blacklead.work/rockLPolymobile2.glb";
+    }
+
+    loader.load(modelPath, function (gltf) {
+      gltf.scene.scale.set(2, 2, 1);
+      gltf.scene.position.set(0, -0.035, 0);
+
+      gltf.scene.traverse(function (object) {
+        if (object instanceof THREE.Mesh) {
+          object.castShadow = true;
+          object.receiveShadow = true;
+          object.material.envMapIntensity = 20;
+        }
+      });
+
+      mesh1 = gltf.scene;
+      if (screenWidth > 480) {
+        mesh1.position.set(1.5, -9.3, -9.2);
+      } else {
+        mesh1.position.set(1.65, -9, -9.1);
+      }
+      scene.add(mesh1);
+    });
+
+    var mixer;
+    var color = new THREE.Color(0xfa, 0xfa, 0xfa);
+
+    var spotLight1 = new THREE.SpotLight(color);
+    if (screenWidth > 480) {
+      spotLight1.position.set(2.4, -4.3, -17);
+    } else {
+      spotLight1.position.set(2.4, -4.3, -17);
+    }
+    spotLight1.castShadow = true;
+    spotLight1.shadow.bias = -0.0001;
+    spotLight1.intensity = 1.5;
+
+    var spotLight2 = new THREE.SpotLight(0x2480ff);
+    spotLight2.position.set(-5, 5, 0);
+    spotLight2.castShadow = true;
+    spotLight2.shadow.bias = -0.0001;
+    spotLight2.intensity = 2;
+
+    scene.add(spotLight1, spotLight2);
+
+    var directionalLight = new THREE.DirectionalLight(0xffffff, 3);
+    directionalLight.position.set(0, 1, 0);
+    scene.add(directionalLight);
+
+    var textureLoader = new THREE.TextureLoader();
+    var gradientTexture = textureLoader.load(
+    "https://cdn.prod.website-files.com/675835c7f4ae1fa1a79b3733/6798da0030dfcbd7c8dd5f91_shadow.webp");
+
+    scene.background = gradientTexture;
+
+    var cursor = { x: 0, y: 0 };
+    function handleTouchMove(event) {
+      var touch = event.touches[0];
+      cursor.x = touch.clientX / sizes.width - 0.5;
+      cursor.y = touch.clientY / sizes.height - 0.5;
+    }
+    window.addEventListener("touchmove", handleTouchMove);
+    window.addEventListener("mousemove", function (event) {
+      cursor.x = event.clientX / sizes.width - 0.5;
+      cursor.y = event.clientY / sizes.height - 0.5;
+    });
+
+    var sizes = {
+      width: window.innerWidth,
+      height: window.innerHeight };
+
+
+    window.addEventListener("resize", function () {
+      sizes.width = window.innerWidth;
+      sizes.height = window.innerHeight;
+
+      camera.aspect = sizes.width / sizes.height;
+      camera.updateProjectionMatrix();
+
+      renderer.setSize(sizes.width, sizes.height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    });
+
+    var cameraGroup = new THREE.Group();
+    var camera = new THREE.PerspectiveCamera(
+    75,
+    sizes.width / sizes.height,
+    0.1,
+    100);
+
+    camera.position.set(1.6, -9, -7);
+
+    scene.add(cameraGroup);
+    cameraGroup.add(camera);
+
+    var renderer = new THREE.WebGLRenderer({
+      canvas: backCanvas,
+      alpha: false });
+
+    renderer.setSize(sizes.width, sizes.height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    var clock = new THREE.Clock();
+    var previousTime = 0;
+
+    var cameraData = {
+      positionX: camera.position.x,
+      positionY: camera.position.y,
+      positionZ: camera.position.z,
+      rotationX: camera.rotation.x,
+      rotationY: camera.rotation.y,
+      rotationZ: camera.rotation.z,
+      fov: 75,
+      near: 0.1,
+      far: 100 };
+
+
+    var targetX = 0;
+    var targetY = -9.2;
+    var targetZ = -7.9;
+    var startTargetX = 1.6;
+    var startTargetY = -9;
+    var startTargetZ = -7;
+    var farTargetX = 0.9;
+    var farTargetY = -7.9;
+    var farTargetZ = -3.1;
+
+    function animateCameraPosition() {
+      gsap.to(camera.position, {
+        x: targetX,
+        y: targetY,
+        z: targetZ,
+        duration: 2,
+        ease: "power2.inOut" });
+
+    }
+    function animateCameraPositionStart() {
+      gsap.to(camera.position, {
+        x: startTargetX,
+        y: startTargetY,
+        z: startTargetZ,
+        duration: 2,
+        ease: "power2.inOut" });
+
+    }
+    function animateCameraPositionFar() {
+      gsap.to(camera.position, {
+        x: farTargetX,
+        y: farTargetY,
+        z: farTargetZ,
+        duration: 2,
+        ease: "power2.inOut" });
+
+    }
+
+    function tick() {
+      var elapsedTime = clock.getElapsedTime();
+      var deltaTime = elapsedTime - previousTime;
+      previousTime = elapsedTime;
+
+      if (mixer) {
+        mixer.update(deltaTime);
+      }
+
+      var minIntensity = 1;
+      var maxIntensity = 5;
+      var parallaxIntensity = cursor.x * 5;
+      var clampedIntensity = THREE.MathUtils.clamp(
+      parallaxIntensity,
+      minIntensity,
+      maxIntensity);
+
+      directionalLight.intensity = clampedIntensity;
+
+      var parallaxAngle = cursor.x * Math.PI / 0.4;
+      spotLight1.position.x = parallaxAngle;
+
+      var parallaxTextureX = cursor.x * 0.05;
+      var parallaxTextureY = cursor.y * 0.05;
+      gradientTexture.offset.x = parallaxTextureX;
+      gradientTexture.offset.y = parallaxTextureY;
+
+      var parallaxX = cursor.x * 0.1;
+      var parallaxY = -cursor.y * 0.1;
+
+      camera.rotation.x = cameraData.rotationX;
+      camera.rotation.y = cameraData.rotationY;
+      camera.rotation.z = cameraData.rotationZ;
+
+      cameraGroup.position.x +=
+      (parallaxX - cameraGroup.position.x) * 5 * deltaTime;
+      cameraGroup.position.y +=
+      (parallaxY - cameraGroup.position.y) * 5 * deltaTime;
+
+      renderer.render(scene, camera);
+      window.requestAnimationFrame(tick);
+    }
+
+    tick();
+  }
+
+  function initHeroSection() {
+    setupHeroSection();
+    onloadSetHeroSection();
+  }
+
+  initHeroSection();
+});
+//# sourceURL=pen.js
+  </script></body></html>
