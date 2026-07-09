@@ -121,9 +121,16 @@ function DesignDetail() {
           <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
             Reference
           </h2>
-          <div className="overflow-hidden rounded-xl border border-border bg-card">
-            <img src={d.screenshotUrl} alt={d.name} className="w-full" />
+          <div className="max-h-[80vh] overflow-auto rounded-xl border border-border bg-card">
+            <img
+              src={d.screenshotUrl}
+              alt={d.name}
+              className="block h-auto max-w-none w-auto mx-auto"
+            />
           </div>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Shown at native resolution — scroll to see the full spec.
+          </p>
         </div>
 
         {/* Copy for AI */}
