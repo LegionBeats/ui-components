@@ -48,7 +48,9 @@ function ImporterPage() {
   const lock = useServerFn(lockDrop);
   const [input, setInput] = useState("");
   const [note, setNote] = useState("");
-  const [type, setType] = useState<"component" | "design">("component");
+  const [type, setType] = useState<"component" | "design" | "template">(
+    "component",
+  );
   const [rows, setRows] = useState<PendingRow[]>([]);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -81,11 +83,15 @@ function ImporterPage() {
       );
       return;
     }
+    // Auto-classify based on URL host if the toggle doesn't already match.
+    let effectiveType = type;
+    if (/(^|\/\/)codepen\.io\//.test(url)) effectiveType = "template";
+    else if (/getdesign\.md/.test(url)) effectiveType = "design";
     setSaving(true);
     const { error } = await supabase.from("pending_components").insert({
       url,
       note: note.trim() || null,
-      type,
+      type: effectiveType,
     });
     setSaving(false);
     if (error) {
@@ -126,7 +132,7 @@ function ImporterPage() {
           <div>
             <label className="mb-1 block text-sm font-medium">Type</label>
             <div className="inline-flex rounded-md border border-border bg-muted/30 p-1">
-              {(["component", "design"] as const).map((t) => (
+              {(["component", "design", "template"] as const).map((t) => (
                 <button
                   key={t}
                   onClick={() => setType(t)}
@@ -148,7 +154,9 @@ function ImporterPage() {
             placeholder={
               type === "design"
                 ? "https://getdesign.md/framer/design-md  —or—  npx getdesign@latest add framer"
-                : "https://21st.dev/r/author/name  —or—  npx shadcn@latest add https://..."
+                : type === "template"
+                  ? "https://codepen.io/user/pen/xxxxxx"
+                  : "https://21st.dev/r/author/name  —or—  npx shadcn@latest add https://..."
             }
             className="w-full rounded-md border bg-background px-3 py-2 text-sm font-mono"
             rows={2}
