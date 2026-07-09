@@ -1,0 +1,1 @@
+UPDATE pending_components SET status = 'done' WHERE id IN ('6dc57ca7-8b40-4c90-ac9c-16ee1cdbb977','5733545e-494b-4621-8bc7-6f3349c642c6','97355d57-9a9e-43bc-971f-580c6a391370');
