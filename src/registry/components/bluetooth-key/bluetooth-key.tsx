@@ -1,9 +1,6 @@
-import { cn } from "@/lib/utils";
-import { useState } from "react";
+import "./bluetooth-key.css";
 
-export const Component = () => {
-  const [count, setCount] = useState(0);
-
+export const BluetoothKey = () => {
   return (
     <>
   <label htmlFor="button" className="wrap">
