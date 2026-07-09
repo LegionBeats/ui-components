@@ -1,0 +1,2 @@
+ALTER TABLE public.pending_components DROP CONSTRAINT IF EXISTS pending_components_type_check;
+ALTER TABLE public.pending_components ADD CONSTRAINT pending_components_type_check CHECK (type IN ('component','design','template'));

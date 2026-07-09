@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { registry } from "@/registry";
 import { designRegistry } from "@/registry/designs";
+import { templateRegistry } from "@/registry/templates";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -17,7 +18,9 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const [tab, setTab] = useState<"components" | "designs">("components");
+  const [tab, setTab] = useState<"components" | "designs" | "templates">(
+    "components",
+  );
   const grouped = registry.reduce<Record<string, typeof registry>>((acc, e) => {
     (acc[e.category] ||= []).push(e);
     return acc;
@@ -41,10 +44,12 @@ function Index() {
           <p className="mt-4 text-sm text-muted-foreground">
             {registry.length} component{registry.length === 1 ? "" : "s"} ·{" "}
             {designRegistry.length} design
-            {designRegistry.length === 1 ? "" : "s"}
+            {designRegistry.length === 1 ? "" : "s"} ·{" "}
+            {templateRegistry.length} template
+            {templateRegistry.length === 1 ? "" : "s"}
           </p>
           <div className="mt-6 inline-flex rounded-md border border-border bg-muted/30 p-1">
-            {(["components", "designs"] as const).map((t) => (
+            {(["components", "designs", "templates"] as const).map((t) => (
               <button
                 key={t}
                 onClick={() => setTab(t)}
@@ -124,6 +129,52 @@ function Index() {
                   <h3 className="font-semibold text-card-foreground">{d.name}</h3>
                   <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
                     {d.description}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {tab === "templates" && (
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {templateRegistry.length === 0 && (
+              <p className="text-sm text-muted-foreground">
+                No templates yet. Drop a CodePen URL at{" "}
+                <Link to="/drop" className="underline">
+                  /drop
+                </Link>
+                .
+              </p>
+            )}
+            {templateRegistry.map((t) => (
+              <Link
+                key={t.slug}
+                to="/t/$slug"
+                params={{ slug: t.slug }}
+                className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-0.5 hover:shadow-lg"
+              >
+                <div className="aspect-[4/3] overflow-hidden border-b border-border bg-muted/30">
+                  {t.screenshotUrl ? (
+                    <img
+                      src={t.screenshotUrl}
+                      alt={t.name}
+                      className="h-full w-full object-cover transition-transform group-hover:scale-[1.02]"
+                    />
+                  ) : (
+                    <iframe
+                      title={t.name}
+                      srcDoc={t.html}
+                      sandbox="allow-scripts allow-same-origin"
+                      className="h-full w-full origin-top-left scale-[0.5] bg-white"
+                      style={{ width: "200%", height: "200%" }}
+                    />
+                  )}
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-card-foreground">{t.name}</h3>
+                  <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
+                    {t.description}
                   </p>
                 </div>
               </Link>
