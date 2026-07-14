@@ -5,6 +5,7 @@ import { climacode } from "./components/climacode";
 import { visualizerButton } from "./components/visualizer-button";
 import { bluetoothKey } from "./components/bluetooth-key";
 import { glowButton } from "./components/glow-button";
+import { logoLoop } from "./components/logo-loop";
 
 /**
  * Add new components here. Each component lives in
@@ -20,6 +21,7 @@ export const registry: RegistryEntry[] = [
   visualizerButton,
   bluetoothKey,
   glowButton,
+  logoLoop,
 ];
 
 export const getEntry = (slug: string) =>
