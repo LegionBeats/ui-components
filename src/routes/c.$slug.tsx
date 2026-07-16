@@ -78,6 +78,7 @@ function ComponentDetail() {
     "claude-code",
     "emergent",
     "google-ai-studio",
+    "gohighlevel",
   ];
 
   return (
