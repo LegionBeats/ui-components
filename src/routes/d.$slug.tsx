@@ -60,6 +60,7 @@ function DesignDetail() {
     "claude-code",
     "emergent",
     "google-ai-studio",
+    "gohighlevel",
   ];
 
   return (
