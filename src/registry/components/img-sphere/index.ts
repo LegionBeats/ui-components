@@ -8,7 +8,7 @@ export const imgSphere: RegistryEntry = {
   name: "Img Sphere",
   description:
     "Interactive 3D image sphere with Fibonacci distribution, drag-to-rotate with momentum, auto-rotation, and spotlight modal on click.",
-  category: "media",
+  category: "misc",
   dependencies: ["lucide-react"],
   shadcnCommand:
     "npx shadcn@latest add https://21st.dev/r/tonyzebastian/img-sphere.json",
