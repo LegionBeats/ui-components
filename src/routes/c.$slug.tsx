@@ -154,18 +154,33 @@ function ComponentDetail() {
             <Sparkles className="h-3.5 w-3.5" />
             Copy for AI
           </h2>
+          <div className="mb-3 flex flex-wrap gap-2">
+            <CopyButton
+              value={aiPrompt("lovable", entry)}
+              label="Copy for Lovable"
+            />
+            <CopyButton
+              value={copyAllFiles(entry)}
+              label="Copy all files"
+            />
+          </div>
           <div className="flex flex-wrap gap-2">
-            {aiTools.map((tool) => (
-              <CopyButton
-                key={tool}
-                value={aiPrompt(tool, entry)}
-                label={aiToolLabel(tool)}
-              />
-            ))}
+            {aiTools
+              .filter((tool) => tool !== "lovable")
+              .map((tool) => (
+                <CopyButton
+                  key={tool}
+                  value={aiPrompt(tool, entry)}
+                  label={aiToolLabel(tool)}
+                />
+              ))}
           </div>
           <p className="mt-2 text-xs text-muted-foreground">
-            Copies a ready-to-paste prompt with the install command and full
-            source. Drop it into the target tool's chat.
+            <strong className="text-foreground">Copy for Lovable</strong> is the
+            fastest way to move this component into another Lovable project — it
+            copies the full prompt with dependencies, files, and a usage example.
+            <strong className="text-foreground"> Copy all files</strong> gives
+            you the raw source if you want to paste it manually.
           </p>
         </div>
 
