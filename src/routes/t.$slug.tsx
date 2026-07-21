@@ -1,7 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft, Check, Copy, Download, ExternalLink } from "lucide-react";
+import { ArrowLeft, Check, Copy, Download, ExternalLink, Sparkles } from "lucide-react";
 import { templateRegistry, getTemplate } from "@/registry/templates";
+import { aiTemplatePrompt, aiToolLabel, type AiTool } from "@/lib/install-prompts";
 
 export const Route = createFileRoute("/t/$slug")({
   loader: ({ params }) => {
