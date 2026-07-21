@@ -1,0 +1,3 @@
+UPDATE pending_components SET status = 'done', note = 'Added to registry' WHERE id IN ('3e5d645e-2370-47c9-8e4c-7562ad0d4a17','3f828681-c2b8-4d94-a3d5-6f1f386a1b17','69dc60d0-0448-44f0-ab29-d2f7cdf51da7','9ddfc1aa-10f0-4ad2-8f63-df9f43ee3c0a','27c3eaa9-33a9-4d80-99b1-723b31c3883f');
+UPDATE pending_components SET status = 'failed', note = '21st.dev API cannot find this component (team-scoped, returns User/Team not found). Paste the source or Copy prompt to add.' WHERE id = 'fe7e40ec-7ef2-4c9d-9b53-0ed14377c1ee';
+UPDATE pending_components SET status = 'failed', note = '21st.dev daily retrieval limit reached. Retry after reset.' WHERE id = '6d571a0e-4475-4b15-8356-0092ef77dad5';
