@@ -1,5 +1,6 @@
 import type { RegistryEntry } from "@/registry/types";
 import type { DesignEntry } from "@/registry/designs/types";
+import type { TemplateEntry } from "@/registry/templates/types";
 
 export type PackageManager = "bun" | "npm" | "pnpm" | "yarn";
 
