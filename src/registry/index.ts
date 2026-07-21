@@ -8,6 +8,11 @@ import { glowButton } from "./components/glow-button";
 import { logoLoop } from "./components/logo-loop";
 import { shinyGradientButton } from "./components/shiny-gradient-button";
 import { imgSphere } from "./components/img-sphere";
+import { accordion11 } from "./components/accordion-11";
+import { licenseKey } from "./components/license-key";
+import { budgetCard } from "./components/budget-card";
+import { integrationCard } from "./components/integration-card";
+import { subscriptionCalendar } from "./components/subscription-calendar";
 
 /**
  * Add new components here. Each component lives in
@@ -26,6 +31,11 @@ export const registry: RegistryEntry[] = [
   logoLoop,
   shinyGradientButton,
   imgSphere,
+  accordion11,
+  licenseKey,
+  budgetCard,
+  integrationCard,
+  subscriptionCalendar,
 ];
 
 export const getEntry = (slug: string) =>
