@@ -33,11 +33,15 @@ export function aiToolLabel(tool: AiTool): string {
   return toolLabels[tool];
 }
 
+function codeFence(language: string, content: string): string {
+  return `${"```"}${language}\n${content}\n${"```"}`;
+}
+
 function filesBlock(entry: RegistryEntry): string {
   return entry.files
     .map(
       (f) =>
-        `File: ${f.target}\n\`\`\`${f.language ?? "tsx"}\n${f.source}\n\`\`\``,
+        `File: ${f.target}\n${codeFence(f.language ?? "tsx", f.source)}`,
     )
     .join("\n\n");
 }
@@ -46,7 +50,7 @@ export function copyAllFiles(entry: RegistryEntry): string {
   return entry.files
     .map(
       (f) =>
-        `// ${f.target}\n\n\`\`\`${f.language ?? "tsx"}\n${f.source}\n\`\`\``,
+        `// ${f.target}\n\n${codeFence(f.language ?? "tsx", f.source)}`,
     )
     .join("\n\n");
 }
@@ -65,8 +69,9 @@ function componentUsageExample(entry: RegistryEntry): string {
 
 Usage example:
 
-\`\`\`tsx
-import { ${componentName} } from "${mainFile.target.replace(/\.tsx$/, "")}";
+${codeFence(
+  "tsx",
+  `import { ${componentName} } from "${mainFile.target.replace(/\.tsx$/, "")}";
 
 export default function Example() {
   return (
@@ -74,8 +79,8 @@ export default function Example() {
       <${componentName} />
     </div>
   );
-}
-\`\`\``;
+}`,
+)}`;
 }
 
 export function aiPrompt(tool: AiTool, entry: RegistryEntry): string {
@@ -111,14 +116,15 @@ export function aiDesignPrompt(tool: AiTool, entry: DesignEntry): string {
 
 export function aiTemplatePrompt(tool: AiTool, entry: TemplateEntry): string {
   const source = entry.sourceUrl ? ` (source: ${entry.sourceUrl})` : "";
+  const htmlBlock = codeFence("html", entry.html);
   const headers: Record<AiTool, string> = {
-    lovable: `Create a new page in my React + Tailwind project that matches the "${entry.name}" template${source}. Build the page as a standalone route component. Use the HTML structure below as the visual reference, preserving layout, text, and interactivity as closely as possible.\n\n- Convert the HTML into a React component with Tailwind classes.\n- Inline any CSS into Tailwind classes or a scoped style block inside the component.\n- Keep scripts as small React hooks or inline effects.\n- Preserve the original fonts, colors, and spacing intent.\n- Return the complete page component file and the route file.\n\nTemplate HTML reference:\n\n\`\`\`html\n${entry.html}\n\`\`\``,`,
-    v0: `Build a page from this HTML template${source}.\n\n\`\`\`html\n${entry.html}\n\`\`\``,`,
-    cursor: `Create a new page component that matches this HTML template${source}. Convert it to React + Tailwind.\n\n\`\`\`html\n${entry.html}\n\`\`\``,`,
-    "claude-code": `Turn this HTML template into a React page${source}. Keep the visual design intact and convert styles to Tailwind or a scoped style block.\n\n\`\`\`html\n${entry.html}\n\`\`\``,`,
-    emergent: `Create a React page from this template${source}. Preserve the layout, colors, and typography.\n\n\`\`\`html\n${entry.html}\n\`\`\``,`,
-    "google-ai-studio": `Convert this HTML template into a React + Tailwind page${source}.\n\n\`\`\`html\n${entry.html}\n\`\`\``,`,
-    gohighlevel: `Paste this HTML snippet into a GoHighLevel Custom HTML / Custom Code block. It is already self-contained and ready to use.\n\n\`\`\`html\n${entry.html}\n\`\`\``,`,
+    lovable: `Create a new page in my React + Tailwind project that matches the "${entry.name}" template${source}. Build the page as a standalone route component. Use the HTML structure below as the visual reference, preserving layout, text, and interactivity as closely as possible.\n\n- Convert the HTML into a React component with Tailwind classes.\n- Inline any CSS into Tailwind classes or a scoped style block inside the component.\n- Keep scripts as small React hooks or inline effects.\n- Preserve the original fonts, colors, and spacing intent.\n- Return the complete page component file and the route file.\n\nTemplate HTML reference:\n\n${htmlBlock}`,
+    v0: `Build a page from this HTML template${source}.\n\n${htmlBlock}`,
+    cursor: `Create a new page component that matches this HTML template${source}. Convert it to React + Tailwind.\n\n${htmlBlock}`,
+    "claude-code": `Turn this HTML template into a React page${source}. Keep the visual design intact and convert styles to Tailwind or a scoped style block.\n\n${htmlBlock}`,
+    emergent: `Create a React page from this template${source}. Preserve the layout, colors, and typography.\n\n${htmlBlock}`,
+    "google-ai-studio": `Convert this HTML template into a React + Tailwind page${source}.\n\n${htmlBlock}`,
+    gohighlevel: `Paste this HTML snippet into a GoHighLevel Custom HTML / Custom Code block. It is already self-contained and ready to use.\n\n${htmlBlock}`,
   };
   return headers[tool];
 }
