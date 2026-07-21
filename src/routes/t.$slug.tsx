@@ -117,7 +117,8 @@ function TemplateDetail() {
                 </p>
               )}
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
+              <CopyButton value={aiTemplatePrompt("lovable", t)} label="Copy for Lovable" />
               <CopyButton value={t.html} label="Copy HTML" />
               <button
                 onClick={() => downloadHtml(t.filename, t.html)}
