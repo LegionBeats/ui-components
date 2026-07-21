@@ -1,0 +1,1 @@
+update public.pending_components set status='done' where id='89564777-6792-4998-961d-a166d4ccd4b3'; update public.pending_components set status='duplicate' where id in ('9cd68594-89be-4ba0-8489-d9b30e264e81','963fdcb3-df06-438a-b1fb-46d22ea2e66c','faec319e-bc33-4a2b-b49a-05944b42ec12','5b73ee45-a9d8-4f2d-809d-4cdbafb163b8');
