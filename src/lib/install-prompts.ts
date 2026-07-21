@@ -41,10 +41,46 @@ function filesBlock(entry: RegistryEntry): string {
     .join("\n\n");
 }
 
+export function copyAllFiles(entry: RegistryEntry): string {
+  return entry.files
+    .map(
+      (f) =>
+        `// ${f.target}\n\n\`\`\`${f.language ?? "tsx"}\n${f.source}\n\`\`\``,
+    )
+    .join("\n\n");
+}
+
+function componentUsageExample(entry: RegistryEntry): string {
+  const mainFile = entry.files.find((f) => f.target.endsWith(".tsx"));
+  if (!mainFile) return "";
+  const importName = mainFile.target
+    .replace(/.*\//, "")
+    .replace(/\.tsx$/, "");
+  const componentName = importName
+    .split("-")
+    .map((s) => s[0]?.toUpperCase() + s.slice(1))
+    .join("");
+  return `
+
+Usage example:
+
+\`\`\`tsx
+import { ${componentName} } from "${mainFile.target.replace(/\.tsx$/, "")}";
+
+export default function Example() {
+  return (
+    <div className="p-8">
+      <${componentName} />
+    </div>
+  );
+}
+\`\`\``;
+}
+
 export function aiPrompt(tool: AiTool, entry: RegistryEntry): string {
   const deps = entry.dependencies.join(" ");
   const headers: Record<AiTool, string> = {
-    lovable: `Add the "${entry.name}" component to my project. Install these dependencies with bun: ${deps}. Then create the following files exactly as shown:`,
+    lovable: `Add the "${entry.name}" component to my project. It is a React component that uses Tailwind CSS for styling and imports from the dependencies listed below.\n\nStep 1: run \`bun add ${deps}\` to install dependencies.\nStep 2: create the following files at the exact paths shown, using the source contents verbatim.\nStep 3: export a default example from a temporary page so I can preview the component immediately.\n\nFiles to create:`,
     v0: `Create a new component called "${entry.name}". Dependencies: ${deps}. Files:`,
     cursor: `Please add this component to the project. Run \`npm install ${deps}\`, then create these files at the given paths:`,
     "claude-code": `Add the "${entry.name}" component. Run \`npm install ${deps}\` (or the project's package manager equivalent), then create the following files at the exact paths shown:`,
@@ -52,7 +88,7 @@ export function aiPrompt(tool: AiTool, entry: RegistryEntry): string {
     "google-ai-studio": `I want to add the "${entry.name}" React component to my project. First, run \`npm install ${deps}\` to install the required dependencies. Then create each of the following files at the exact path shown, using the contents provided verbatim:`,
     gohighlevel: `Convert the following React + Tailwind component into a single self-contained snippet I can paste into a GoHighLevel Custom HTML / Custom Code element (funnel or website builder).\n\nRequirements:\n- Output ONE block of plain HTML with an inline <style> tag and, if needed, an inline <script> tag. No React, no JSX, no build step, no external framework imports.\n- Replace Tailwind utility classes with equivalent plain CSS scoped under a unique wrapper class (e.g. .ghl-${entry.slug}) so styles do not leak into the rest of the page.\n- Replace lucide-react / react-icons with inline SVGs.\n- Replace framer-motion / motion with CSS transitions/animations or small vanilla JS. If an effect truly can't be reproduced without a React runtime, degrade gracefully and note it in an HTML comment.\n- Keep the visual result as close to the original as possible; simplify interactivity only where React is strictly required.\n- Return only the final HTML snippet, ready to paste.\n\nOriginal component source for reference:`,
   };
-  return `${headers[tool]}\n\n${filesBlock(entry)}`;
+  return `${headers[tool]}\n\n${filesBlock(entry)}${componentUsageExample(entry)}`;
 }
 
 export function aiDesignPrompt(tool: AiTool, entry: DesignEntry): string {
