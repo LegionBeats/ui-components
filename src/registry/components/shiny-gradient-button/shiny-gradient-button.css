@@ -1,0 +1,32 @@
+@property --shiny-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.shiny-gradient-btn {
+  --shiny-angle: 0deg;
+  background:
+    linear-gradient(#050202, #050202) padding-box,
+    conic-gradient(
+      from var(--shiny-angle),
+      transparent 0%,
+      #ef233c 8%,
+      #e5a00d 22%,
+      #ef233c 36%,
+      transparent 48%,
+      transparent 100%
+    ) border-box;
+  animation: shiny-gradient-spin 4s linear infinite;
+}
+
+@keyframes shiny-gradient-spin {
+  to {
+    --shiny-angle: 360deg;
+  }
+}
+
+.shiny-gradient-btn__dots {
+  background-image: radial-gradient(circle at 50% 50%, white 0.5px, transparent 0);
+  background-size: 4px 4px;
+}
