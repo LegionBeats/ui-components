@@ -98,13 +98,27 @@ export function aiDesignPrompt(tool: AiTool, entry: DesignEntry): string {
     : "";
   const source = entry.sourceUrl ? ` (source: ${entry.sourceUrl})` : "";
   const headers: Record<AiTool, string> = {
-    lovable: `Restyle my current project to match the "${entry.name}" design system${source}. Apply the palette, typography, spacing, radii, and overall visual language described below to the existing pages and components — don't add new pages. Use design tokens in src/styles.css rather than hardcoded values.${promptBlock}`,
+    lovable: `Apply the "${entry.name}" design system to my current project${source}. Do not add new pages; update the existing pages and components to match this visual language.\n\nExtract the palette, typography, spacing, radii, and shadows from the spec below, then:\n- Create or update semantic CSS tokens in src/styles.css.\n- Refactor existing components to use those tokens.\n- Keep the current routes and content intact; only change styling.\n\nDesign spec:${promptBlock}`,
     v0: `Use this design system spec as the visual language for the component you generate next${source}.${promptBlock}`,
     cursor: `Apply the following design system to this project. Update the Tailwind theme / CSS tokens and refactor existing components to match. Do not add new pages.${promptBlock}`,
     "claude-code": `Apply this design system to the current project. Update the theme tokens (colors, typography, spacing, radii, shadows) and adjust existing components to match. Keep the routes and content unchanged.${promptBlock}`,
     emergent: `Restyle this project to match the "${entry.name}" design system${source}. Update tokens and refactor existing components — no new pages.${promptBlock}`,
     "google-ai-studio": `I'm going to give you a design system spec. Use it as the visual language for a React + Tailwind project: derive the color tokens, typography scale, spacing, radii, and component styles from it and describe how you would apply them.${promptBlock}`,
     gohighlevel: `I'm styling pages inside GoHighLevel's funnel/website builder (Custom HTML/CSS/JS blocks — no React, no Tailwind build). Translate the "${entry.name}" design system${source} into: (1) a palette of hex values I can plug into GHL's global colors, (2) recommended Google Fonts + weights with the exact <link> tag, (3) a small plain-CSS snippet with variables and base styles for headings, body, buttons, and cards that I can paste into a global Custom CSS block. Keep it framework-free.${promptBlock}`,
+  };
+  return headers[tool];
+}
+
+export function aiTemplatePrompt(tool: AiTool, entry: TemplateEntry): string {
+  const source = entry.sourceUrl ? ` (source: ${entry.sourceUrl})` : "";
+  const headers: Record<AiTool, string> = {
+    lovable: `Create a new page in my React + Tailwind project that matches the "${entry.name}" template${source}. Build the page as a standalone route component. Use the HTML structure below as the visual reference, preserving layout, text, and interactivity as closely as possible.\n\n- Convert the HTML into a React component with Tailwind classes.\n- Inline any CSS into Tailwind classes or a scoped style block inside the component.\n- Keep scripts as small React hooks or inline effects.\n- Preserve the original fonts, colors, and spacing intent.\n- Return the complete page component file and the route file.\n\nTemplate HTML reference:\n\n\`\`\`html\n${entry.html}\n\`\`\``,`,
+    v0: `Build a page from this HTML template${source}.\n\n\`\`\`html\n${entry.html}\n\`\`\``,`,
+    cursor: `Create a new page component that matches this HTML template${source}. Convert it to React + Tailwind.\n\n\`\`\`html\n${entry.html}\n\`\`\``,`,
+    "claude-code": `Turn this HTML template into a React page${source}. Keep the visual design intact and convert styles to Tailwind or a scoped style block.\n\n\`\`\`html\n${entry.html}\n\`\`\``,`,
+    emergent: `Create a React page from this template${source}. Preserve the layout, colors, and typography.\n\n\`\`\`html\n${entry.html}\n\`\`\``,`,
+    "google-ai-studio": `Convert this HTML template into a React + Tailwind page${source}.\n\n\`\`\`html\n${entry.html}\n\`\`\``,`,
+    gohighlevel: `Paste this HTML snippet into a GoHighLevel Custom HTML / Custom Code block. It is already self-contained and ready to use.\n\n\`\`\`html\n${entry.html}\n\`\`\``,`,
   };
   return headers[tool];
 }
