@@ -5,6 +5,7 @@ import { getEntry, registry } from "@/registry";
 import {
   aiPrompt,
   aiToolLabel,
+  copyAllFiles,
   installCommand,
   type AiTool,
   type PackageManager,
