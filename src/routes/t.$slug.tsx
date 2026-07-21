@@ -1,7 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft, Check, Copy, Download, ExternalLink } from "lucide-react";
+import { ArrowLeft, Check, Copy, Download, ExternalLink, Sparkles } from "lucide-react";
 import { templateRegistry, getTemplate } from "@/registry/templates";
+import { aiTemplatePrompt, aiToolLabel, type AiTool } from "@/lib/install-prompts";
 
 export const Route = createFileRoute("/t/$slug")({
   loader: ({ params }) => {
@@ -116,7 +117,8 @@ function TemplateDetail() {
                 </p>
               )}
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
+              <CopyButton value={aiTemplatePrompt("lovable", t)} label="Copy for Lovable" />
               <CopyButton value={t.html} label="Copy HTML" />
               <button
                 onClick={() => downloadHtml(t.filename, t.html)}
@@ -143,6 +145,44 @@ function TemplateDetail() {
               className="h-[720px] w-full bg-white"
             />
           </div>
+        </div>
+
+        {/* Copy for AI */}
+        <div>
+          <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+            <Sparkles className="h-3.5 w-3.5" />
+            Copy for AI
+          </h2>
+          <div className="mb-3 flex flex-wrap gap-2">
+            <CopyButton
+              value={aiTemplatePrompt("lovable", t)}
+              label="Copy for Lovable"
+            />
+            <CopyButton value={t.html} label="Copy HTML" />
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {(
+              [
+                "v0",
+                "cursor",
+                "claude-code",
+                "emergent",
+                "google-ai-studio",
+                "gohighlevel",
+              ] as AiTool[]
+            ).map((tool) => (
+              <CopyButton
+                key={tool}
+                value={aiTemplatePrompt(tool, t)}
+                label={aiToolLabel(tool)}
+              />
+            ))}
+          </div>
+          <p className="mt-2 text-xs text-muted-foreground">
+            <strong className="text-foreground">Copy for Lovable</strong> turns
+            this HTML template into a prompt for creating a matching React page.
+            The HTML copy stays available for any other builder.
+          </p>
         </div>
 
         <div>

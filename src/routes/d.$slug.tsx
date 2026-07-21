@@ -140,18 +140,29 @@ function DesignDetail() {
             <Sparkles className="h-3.5 w-3.5" />
             Copy for AI
           </h2>
+          <div className="mb-3 flex flex-wrap gap-2">
+            <CopyButton
+              value={aiDesignPrompt("lovable", d)}
+              label="Copy for Lovable"
+            />
+            {d.prompt && (
+              <CopyButton value={d.prompt.source} label="Copy design spec" />
+            )}
+          </div>
           <div className="flex flex-wrap gap-2">
-            {aiTools.map((tool) => (
-              <CopyButton
-                key={tool}
-                value={aiDesignPrompt(tool, d)}
-                label={aiToolLabel(tool)}
-              />
-            ))}
+            {aiTools
+              .filter((tool) => tool !== "lovable")
+              .map((tool) => (
+                <CopyButton
+                  key={tool}
+                  value={aiDesignPrompt(tool, d)}
+                  label={aiToolLabel(tool)}
+                />
+              ))}
           </div>
           <p className="mt-2 text-xs text-muted-foreground">
-            Copies a ready-to-paste prompt including the full design spec. Drop
-            it into the target tool's chat to restyle a project.
+            <strong className="text-foreground">Copy for Lovable</strong> is the
+            fastest way to apply this design system to another Lovable project.
           </p>
         </div>
 
