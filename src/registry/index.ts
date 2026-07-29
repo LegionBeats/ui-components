@@ -16,6 +16,10 @@ import { subscriptionCalendar } from "./components/subscription-calendar";
 import { card12 } from "./components/card-12";
 import { onboardingScreen } from "./components/onboarding-screen";
 import { spotlightBg } from "./components/spotlight-bg";
+import { purpleRadialBg } from "./components/purple-radial-bg";
+import { dotGridBg } from "./components/dot-grid-bg";
+import { gridGlowBg } from "./components/grid-glow-bg";
+import { darkGridSpotlightBg } from "./components/dark-grid-spotlight-bg";
 
 
 /**
