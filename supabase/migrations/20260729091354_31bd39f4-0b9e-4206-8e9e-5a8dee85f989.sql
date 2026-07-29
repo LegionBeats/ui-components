@@ -1,0 +1,2 @@
+UPDATE public.pending_components SET status='done' WHERE id IN ('772026d6-08bd-4e5f-a072-85e33f531eb4','ac041d6e-33fd-4a1d-b1f8-b784b98347af');
+UPDATE public.pending_components SET status='failed', note='21st.dev daily retrieval limit (2/day). Retry after reset.' WHERE id IN ('a4a0af3d-6b54-4a9d-b790-7f533a8bd39b','1d319811-a181-4e0b-a317-7db53da57c65');
