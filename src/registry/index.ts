@@ -47,6 +47,10 @@ export const registry: RegistryEntry[] = [
   card12,
   onboardingScreen,
   spotlightBg,
+  purpleRadialBg,
+  dotGridBg,
+  gridGlowBg,
+  darkGridSpotlightBg,
 ];
 
 
