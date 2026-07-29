@@ -20,6 +20,8 @@ import { purpleRadialBg } from "./components/purple-radial-bg";
 import { dotGridBg } from "./components/dot-grid-bg";
 import { gridGlowBg } from "./components/grid-glow-bg";
 import { darkGridSpotlightBg } from "./components/dark-grid-spotlight-bg";
+import { animatedTabs } from "./components/animated-tabs";
+import { testimonialsColumns } from "./components/testimonials-columns";
 
 
 /**
@@ -51,6 +53,8 @@ export const registry: RegistryEntry[] = [
   dotGridBg,
   gridGlowBg,
   darkGridSpotlightBg,
+  animatedTabs,
+  testimonialsColumns,
 ];
 
 
