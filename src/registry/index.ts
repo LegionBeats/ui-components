@@ -42,7 +42,9 @@ export const registry: RegistryEntry[] = [
   subscriptionCalendar,
   card12,
   onboardingScreen,
+  spotlightBg,
 ];
+
 
 export const getEntry = (slug: string) =>
   registry.find((e) => e.slug === slug);
