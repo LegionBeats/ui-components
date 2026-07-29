@@ -15,6 +15,8 @@ import { integrationCard } from "./components/integration-card";
 import { subscriptionCalendar } from "./components/subscription-calendar";
 import { card12 } from "./components/card-12";
 import { onboardingScreen } from "./components/onboarding-screen";
+import { spotlightBg } from "./components/spotlight-bg";
+
 
 /**
  * Add new components here. Each component lives in
@@ -40,7 +42,9 @@ export const registry: RegistryEntry[] = [
   subscriptionCalendar,
   card12,
   onboardingScreen,
+  spotlightBg,
 ];
+
 
 export const getEntry = (slug: string) =>
   registry.find((e) => e.slug === slug);
