@@ -13,6 +13,8 @@ import { licenseKey } from "./components/license-key";
 import { budgetCard } from "./components/budget-card";
 import { integrationCard } from "./components/integration-card";
 import { subscriptionCalendar } from "./components/subscription-calendar";
+import { card12 } from "./components/card-12";
+import { onboardingScreen } from "./components/onboarding-screen";
 
 /**
  * Add new components here. Each component lives in
@@ -36,6 +38,8 @@ export const registry: RegistryEntry[] = [
   budgetCard,
   integrationCard,
   subscriptionCalendar,
+  card12,
+  onboardingScreen,
 ];
 
 export const getEntry = (slug: string) =>
