@@ -22,6 +22,7 @@ import { gridGlowBg } from "./components/grid-glow-bg";
 import { darkGridSpotlightBg } from "./components/dark-grid-spotlight-bg";
 import { animatedTabs } from "./components/animated-tabs";
 import { testimonialsColumns } from "./components/testimonials-columns";
+import { shiningText } from "./components/shining-text";
 
 
 /**
@@ -55,6 +56,7 @@ export const registry: RegistryEntry[] = [
   darkGridSpotlightBg,
   animatedTabs,
   testimonialsColumns,
+  shiningText,
 ];
 
 
