@@ -1,0 +1,2 @@
+update public.pending_components set status='done', note='Added to registry' where id='a4a0af3d-6b54-4a9d-b790-7f533a8bd39b';
+update public.pending_components set status='failed', note='21st.dev daily retrieval limit (2/day) reached again. Retry after 2026-08-01.' where id in ('1d319811-a181-4e0b-a317-7db53da57c65','6d571a0e-4475-4b15-8356-0092ef77dad5','b18f5fde-6e31-460a-8646-999b8bfa0052');
