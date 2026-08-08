@@ -1,0 +1,2 @@
+update public.pending_components set status='done' where id in ('d3b20951-e46b-4b98-a930-484d396b0b90','307908b6-9c5a-4938-9540-aac90a5fbccf');
+update public.pending_components set status='duplicate', note='Already added as logo-loop.' where id in ('05dcfac5-356e-4fa8-a14f-74edb4ce2755','5bb3570b-5be0-4fb2-aa65-4f39a452b23c');
