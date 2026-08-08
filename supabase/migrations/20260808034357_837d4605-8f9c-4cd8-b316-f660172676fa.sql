@@ -1,0 +1,2 @@
+update public.pending_components set status='done', note='Added to registry' where id in ('6ff3d73f-8247-4fd6-86d3-6a59b2ea3639','f58bdce5-e02d-475b-b27a-93cdca67700d','bf130458-264c-4fc9-b1a5-052ba7b88037','9a1f039b-d584-4a89-989b-e80f0c094efa');
+update public.pending_components set status='failed', note='Not found in Watermelon registry (404).' where id in ('701b3aed-9145-4815-ba36-39caabaa37e6','dddcde74-ed9d-4b19-a76b-9d28fc61f19f');
