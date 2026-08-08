@@ -17,7 +17,14 @@ export default function VisualizerButton({
   height = 30,
   className,
 }: VisualizerButtonProps) {
-  const [audio] = React.useState(new Audio(audioSrc))
+  const audioRef = React.useRef<HTMLAudioElement | null>(null)
+  React.useEffect(() => {
+    audioRef.current = new Audio(audioSrc)
+    return () => {
+      audioRef.current?.pause()
+      audioRef.current = null
+    }
+  }, [audioSrc])
   const [isPlaying, setIsPlaying] = React.useState(false)
   const [levels, setLevels] = React.useState<number[]>(Array(5).fill(0))
 
@@ -34,8 +41,10 @@ export default function VisualizerButton({
   }, [isPlaying, height])
 
   const togglePlay = () => {
+    const audio = audioRef.current
+    if (!audio) return
     if (isPlaying) audio.pause()
-    else audio.play()
+    else void audio.play()
     setIsPlaying(!isPlaying)
   }
 
