@@ -30,6 +30,7 @@ import { textBlurIn } from "./components/text-blur-in";
 import { metalFx } from "./components/metal-fx";
 import { depthCarousel } from "./components/depth-carousel";
 import { emojiSpreeChips } from "./components/emoji-spree-chips";
+import { thinkingOrb } from "./components/thinking-orb";
 
 
 /**
@@ -71,6 +72,7 @@ export const registry: RegistryEntry[] = [
   metalFx,
   depthCarousel,
   emojiSpreeChips,
+  thinkingOrb,
 ];
 
 
