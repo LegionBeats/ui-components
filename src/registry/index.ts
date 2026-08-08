@@ -27,6 +27,7 @@ import { hero15 } from "./components/hero-15";
 import { collapsible7 } from "./components/collapsible-7";
 import { listStack } from "./components/list-stack";
 import { textBlurIn } from "./components/text-blur-in";
+import { metalFx } from "./components/metal-fx";
 
 
 /**
@@ -65,6 +66,7 @@ export const registry: RegistryEntry[] = [
   collapsible7,
   listStack,
   textBlurIn,
+  metalFx,
 ];
 
 
