@@ -74,23 +74,32 @@ export function HeroSection() {
  
     // Floating elements on scroll
     let scrolled = false;
-    function onScroll() {
-      if (!scrolled) {
-        scrolled = true;
-        document.querySelectorAll<HTMLElement>(".floating-element").forEach((el, index) => {
+    const timeouts: ReturnType<typeof setTimeout>[] = [];
+    function startFloating() {
+      if (scrolled) return;
+      scrolled = true;
+      document.querySelectorAll<HTMLElement>(".floating-element").forEach((el, index) => {
+        timeouts.push(
           setTimeout(() => {
             el.style.animationPlayState = "running";
-          }, index * 200);
-        });
-      }
+          }, index * 200),
+        );
+      });
+    }
+    function onScroll() {
+      startFloating();
     }
     window.addEventListener("scroll", onScroll);
+    // Also start once the intro sequence finishes, so the dots animate
+    // even when the hero is viewed in a non-scrolling container.
+    timeouts.push(setTimeout(startFloating, 5000));
  
     return () => {
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseleave", onMouseLeave);
       document.removeEventListener("click", onClick);
       window.removeEventListener("scroll", onScroll);
+      timeouts.forEach(clearTimeout);
     };
   }, []);
  
