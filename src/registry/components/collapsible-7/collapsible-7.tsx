@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { ChevronUpIcon } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import { Card, CardAction, CardContent, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 
 type HelpCard = {
@@ -31,14 +31,14 @@ const Collapsible7 = () => {
       <Collapsible open={open} onOpenChange={setOpen}>
         <div className='flex items-center justify-between px-6 py-5'>
           <CardTitle className='text-base'>{helpCard.question}</CardTitle>
-          <CardAction>
+          <div>
             <CollapsibleTrigger>
               <Button variant='outline' size='sm' className='border-border/70'>
                 <span>{open ? 'Hide' : 'Show'}</span>
                 <ChevronUpIcon className={`size-4 transition-transform ${open ? '' : 'rotate-180'}`} />
               </Button>
             </CollapsibleTrigger>
-          </CardAction>
+          </div>
         </div>
         <CollapsibleContent>
           <CardContent className='space-y-3 px-0 pb-0'>
