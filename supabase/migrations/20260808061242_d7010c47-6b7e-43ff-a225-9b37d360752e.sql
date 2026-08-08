@@ -1,0 +1,1 @@
+update public.pending_components set status='done', note='Added to registry' where id='96262b21-8ed0-4f01-b06d-2ffe68695567';
