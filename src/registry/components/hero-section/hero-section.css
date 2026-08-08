@@ -79,8 +79,8 @@
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(200, 180, 160, 0.4), transparent);
   animation: underline-grow 2s ease-out forwards;
-  /* starts only after the second headline line has finished revealing */
-  animation-delay: 5s;
+  /* sweeps in while the second headline line reveals from blur */
+  animation-delay: 2.6s;
 }
 .floating-element {
   position: absolute;
