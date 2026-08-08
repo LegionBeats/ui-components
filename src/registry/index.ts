@@ -23,6 +23,10 @@ import { darkGridSpotlightBg } from "./components/dark-grid-spotlight-bg";
 import { animatedTabs } from "./components/animated-tabs";
 import { testimonialsColumns } from "./components/testimonials-columns";
 import { shiningText } from "./components/shining-text";
+import { hero15 } from "./components/hero-15";
+import { collapsible7 } from "./components/collapsible-7";
+import { listStack } from "./components/list-stack";
+import { textBlurIn } from "./components/text-blur-in";
 
 
 /**
@@ -57,6 +61,10 @@ export const registry: RegistryEntry[] = [
   animatedTabs,
   testimonialsColumns,
   shiningText,
+  hero15,
+  collapsible7,
+  listStack,
+  textBlurIn,
 ];
 
 
