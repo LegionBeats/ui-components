@@ -180,6 +180,14 @@ export function HeroSection() {
       <div className="floating-element" style={{ top: "60%", left: "85%", animationDelay: "5.5s" }}></div>
       <div className="floating-element" style={{ top: "40%", left: "10%", animationDelay: "6s" }}></div>
       <div className="floating-element" style={{ top: "75%", left: "90%", animationDelay: "6.5s" }}></div>
+      <div className="floating-element" style={{ top: "18%", left: "42%", animationDelay: "5.2s" }}></div>
+      <div className="floating-element" style={{ top: "32%", left: "72%", animationDelay: "5.8s" }}></div>
+      <div className="floating-element" style={{ top: "55%", left: "28%", animationDelay: "6.2s" }}></div>
+      <div className="floating-element" style={{ top: "68%", left: "58%", animationDelay: "6.8s" }}></div>
+      <div className="floating-element" style={{ top: "85%", left: "35%", animationDelay: "7.2s" }}></div>
+      <div className="floating-element" style={{ top: "88%", left: "68%", animationDelay: "7.6s" }}></div>
+      <div className="floating-element" style={{ top: "12%", left: "62%", animationDelay: "8s" }}></div>
+      <div className="floating-element" style={{ top: "48%", left: "94%", animationDelay: "8.4s" }}></div>
  
       <div className="relative z-10 min-h-screen flex flex-col justify-between items-center px-8 py-12 md:px-16 md:py-20">
         {/* Top tagline */}
