@@ -28,6 +28,8 @@ import { collapsible7 } from "./components/collapsible-7";
 import { listStack } from "./components/list-stack";
 import { textBlurIn } from "./components/text-blur-in";
 import { metalFx } from "./components/metal-fx";
+import { depthCarousel } from "./components/depth-carousel";
+import { emojiSpreeChips } from "./components/emoji-spree-chips";
 
 
 /**
@@ -67,6 +69,8 @@ export const registry: RegistryEntry[] = [
   listStack,
   textBlurIn,
   metalFx,
+  depthCarousel,
+  emojiSpreeChips,
 ];
 
 
