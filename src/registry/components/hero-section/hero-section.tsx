@@ -20,13 +20,16 @@ export function HeroSection() {
   const gradientRef = useRef<HTMLDivElement>(null);
  
   useEffect(() => {
+    // Small lead-in so the first words don't appear the instant it mounts
+    const INTRO_OFFSET = 600;
+
     // Animate words
     const words = document.querySelectorAll<HTMLElement>(".word");
     words.forEach((word) => {
       const delay = parseInt(word.getAttribute("data-delay") || "0", 10);
       setTimeout(() => {
         word.style.animation = "word-appear 0.8s ease-out forwards";
-      }, delay);
+      }, delay + INTRO_OFFSET);
     });
  
     // Mouse gradient
