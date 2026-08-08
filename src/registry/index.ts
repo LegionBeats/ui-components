@@ -31,6 +31,7 @@ import { metalFx } from "./components/metal-fx";
 import { depthCarousel } from "./components/depth-carousel";
 import { emojiSpreeChips } from "./components/emoji-spree-chips";
 import { thinkingOrb } from "./components/thinking-orb";
+import { heroSection } from "./components/hero-section";
 
 
 /**
@@ -73,6 +74,7 @@ export const registry: RegistryEntry[] = [
   depthCarousel,
   emojiSpreeChips,
   thinkingOrb,
+  heroSection,
 ];
 
 
