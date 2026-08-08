@@ -20,8 +20,8 @@ export function HeroSection() {
   const gradientRef = useRef<HTMLDivElement>(null);
  
   useEffect(() => {
-    // Small lead-in so the first words don't appear the instant it mounts
-    const INTRO_OFFSET = 600;
+    // Match the original: the sequence starts immediately on mount
+    const INTRO_OFFSET = 0;
 
     // Animate words
     const words = document.querySelectorAll<HTMLElement>(".word");
