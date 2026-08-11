@@ -83,7 +83,9 @@ export const registry: RegistryEntry[] = [
   mScrollProgress3,
   vAvatar9,
   vAvatar8,
+  vCard6,
 ];
+
 
 
 export const getEntry = (slug: string) =>
