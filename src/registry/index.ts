@@ -78,6 +78,7 @@ export const registry: RegistryEntry[] = [
   thinkingOrb,
   heroSection,
   mScrollProgress3,
+  vAvatar9,
 ];
 
 
