@@ -41,6 +41,7 @@ import { vCard8 } from "./components/v-card-8";
 import { typewriter } from "./components/typewriter";
 import { countingNumber } from "./components/counting-number";
 import { textShimmer } from "./components/text-shimmer";
+import { textHighlight } from "./components/text-highlight";
 
 
 
@@ -95,6 +96,7 @@ export const registry: RegistryEntry[] = [
   typewriter,
   countingNumber,
   textShimmer,
+  textHighlight,
 ];
 
 
