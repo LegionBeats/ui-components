@@ -10,7 +10,7 @@ export const animatedGradientWithSvg: RegistryEntry = {
   name: "Animated Gradient (SVG)",
   description:
     "Multi-color animated gradient background built from blurred SVG circles that drift around their container.",
-  category: "backgrounds",
+  category: "effects",
   dependencies: [],
   shadcnCommand:
     "npx shadcn@latest add https://21st.dev/r/danielpetho/animated-gradient-with-svg",
