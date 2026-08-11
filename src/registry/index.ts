@@ -80,6 +80,7 @@ export const registry: RegistryEntry[] = [
   heroSection,
   mScrollProgress3,
   vAvatar9,
+  vAvatar8,
 ];
 
 
