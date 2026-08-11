@@ -44,6 +44,7 @@ import { textShimmer } from "./components/text-shimmer";
 import { textHighlight } from "./components/text-highlight";
 import { rollingText } from "./components/rolling-text";
 import { scrollVelocityText } from "./components/scroll-velocity-text";
+import { animatedGradientWithSvg } from "./components/animated-gradient-with-svg";
 
 
 
@@ -56,6 +57,7 @@ import { scrollVelocityText } from "./components/scroll-velocity-text";
  *   - an `index.ts` exporting a RegistryEntry
  */
 export const registry: RegistryEntry[] = [
+  animatedGradientWithSvg,
   morphingButton,
   interactiveFolderGallery,
   climacode,
