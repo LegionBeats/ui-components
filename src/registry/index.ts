@@ -32,6 +32,7 @@ import { depthCarousel } from "./components/depth-carousel";
 import { emojiSpreeChips } from "./components/emoji-spree-chips";
 import { thinkingOrb } from "./components/thinking-orb";
 import { heroSection } from "./components/hero-section";
+import { mScrollProgress3 } from "./components/m-scroll-progress-3";
 
 
 /**
