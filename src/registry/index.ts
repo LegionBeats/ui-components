@@ -42,6 +42,7 @@ import { typewriter } from "./components/typewriter";
 import { countingNumber } from "./components/counting-number";
 import { textShimmer } from "./components/text-shimmer";
 import { textHighlight } from "./components/text-highlight";
+import { rollingText } from "./components/rolling-text";
 
 
 
@@ -97,6 +98,7 @@ export const registry: RegistryEntry[] = [
   countingNumber,
   textShimmer,
   textHighlight,
+  rollingText,
 ];
 
 
