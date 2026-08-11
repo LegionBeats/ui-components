@@ -38,6 +38,7 @@ import { vAvatar8 } from "./components/v-avatar-8";
 import { vCard6 } from "./components/v-card-6";
 import { vCard7 } from "./components/v-card-7";
 import { vCard8 } from "./components/v-card-8";
+import { typewriter } from "./components/typewriter";
 
 
 
@@ -89,6 +90,7 @@ export const registry: RegistryEntry[] = [
   vCard6,
   vCard7,
   vCard8,
+  typewriter,
 ];
 
 
