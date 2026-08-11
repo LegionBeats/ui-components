@@ -39,6 +39,7 @@ import { vCard6 } from "./components/v-card-6";
 import { vCard7 } from "./components/v-card-7";
 import { vCard8 } from "./components/v-card-8";
 import { typewriter } from "./components/typewriter";
+import { countingNumber } from "./components/counting-number";
 
 
 
@@ -91,6 +92,7 @@ export const registry: RegistryEntry[] = [
   vCard7,
   vCard8,
   typewriter,
+  countingNumber,
 ];
 
 
