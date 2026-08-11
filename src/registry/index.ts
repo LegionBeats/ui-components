@@ -37,6 +37,7 @@ import { vAvatar9 } from "./components/v-avatar-9";
 import { vAvatar8 } from "./components/v-avatar-8";
 import { vCard6 } from "./components/v-card-6";
 import { vCard7 } from "./components/v-card-7";
+import { vCard8 } from "./components/v-card-8";
 
 
 
@@ -87,6 +88,7 @@ export const registry: RegistryEntry[] = [
   vAvatar8,
   vCard6,
   vCard7,
+  vCard8,
 ];
 
 
