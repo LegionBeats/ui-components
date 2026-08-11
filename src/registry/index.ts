@@ -76,6 +76,7 @@ export const registry: RegistryEntry[] = [
   emojiSpreeChips,
   thinkingOrb,
   heroSection,
+  mScrollProgress3,
 ];
 
 
