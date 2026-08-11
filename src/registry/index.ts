@@ -35,7 +35,9 @@ import { heroSection } from "./components/hero-section";
 import { mScrollProgress3 } from "./components/m-scroll-progress-3";
 import { vAvatar9 } from "./components/v-avatar-9";
 import { vAvatar8 } from "./components/v-avatar-8";
+import { vCard6 } from "./components/v-card-6";
 import { vCard7 } from "./components/v-card-7";
+
 
 
 
