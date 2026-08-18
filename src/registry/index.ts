@@ -45,6 +45,7 @@ import { textHighlight } from "./components/text-highlight";
 import { rollingText } from "./components/rolling-text";
 import { scrollVelocityText } from "./components/scroll-velocity-text";
 import { animatedGradientWithSvg } from "./components/animated-gradient-with-svg";
+import { textReveal } from "./components/text-reveal";
 
 
 
@@ -57,6 +58,7 @@ import { animatedGradientWithSvg } from "./components/animated-gradient-with-svg
  *   - an `index.ts` exporting a RegistryEntry
  */
 export const registry: RegistryEntry[] = [
+  textReveal,
   animatedGradientWithSvg,
   morphingButton,
   interactiveFolderGallery,
