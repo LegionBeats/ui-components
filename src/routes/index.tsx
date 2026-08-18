@@ -75,13 +75,11 @@ function Index() {
             </h2>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {items.map((entry) => (
-                <Link
+                <div
                   key={entry.slug}
-                  to="/c/$slug"
-                  params={{ slug: entry.slug }}
-                  className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-0.5 hover:shadow-lg"
+                  className="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-0.5 hover:shadow-lg"
                 >
-                  <div className="flex h-48 items-center justify-center overflow-hidden border-b border-border bg-muted/30">
+                  <div className="pointer-events-none flex h-48 items-center justify-center overflow-hidden border-b border-border bg-muted/30">
                     <div className="scale-90 transition-transform group-hover:scale-95">
                       <entry.Preview />
                     </div>
@@ -94,7 +92,13 @@ function Index() {
                       {entry.description}
                     </p>
                   </div>
-                </Link>
+                  <Link
+                    to="/c/$slug"
+                    params={{ slug: entry.slug }}
+                    aria-label={entry.name}
+                    className="absolute inset-0 z-10"
+                  />
+                </div>
               ))}
             </div>
           </div>
