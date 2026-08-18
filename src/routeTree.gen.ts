@@ -9,16 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as DropUnlockRouteImport } from './routes/drop-unlock'
-import { Route as DropRouteImport } from './routes/drop'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as TSlugRouteImport } from './routes/t.$slug'
-import { Route as DSlugRouteImport } from './routes/d.$slug'
+import { Route as DropRouteImport } from './routes/drop'
+import { Route as DropUnlockRouteImport } from './routes/drop-unlock'
 import { Route as CSlugRouteImport } from './routes/c.$slug'
+import { Route as DSlugRouteImport } from './routes/d.$slug'
+import { Route as TSlugRouteImport } from './routes/t.$slug'
 
-const DropUnlockRoute = DropUnlockRouteImport.update({
-  id: '/drop-unlock',
-  path: '/drop-unlock',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DropRoute = DropRouteImport.update({
@@ -26,14 +26,14 @@ const DropRoute = DropRouteImport.update({
   path: '/drop',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const DropUnlockRoute = DropUnlockRouteImport.update({
+  id: '/drop-unlock',
+  path: '/drop-unlock',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TSlugRoute = TSlugRouteImport.update({
-  id: '/t/$slug',
-  path: '/t/$slug',
+const CSlugRoute = CSlugRouteImport.update({
+  id: '/c/$slug',
+  path: '/c/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DSlugRoute = DSlugRouteImport.update({
@@ -41,9 +41,9 @@ const DSlugRoute = DSlugRouteImport.update({
   path: '/d/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CSlugRoute = CSlugRouteImport.update({
-  id: '/c/$slug',
-  path: '/c/$slug',
+const TSlugRoute = TSlugRouteImport.update({
+  id: '/t/$slug',
+  path: '/t/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -104,11 +104,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/drop-unlock': {
-      id: '/drop-unlock'
-      path: '/drop-unlock'
-      fullPath: '/drop-unlock'
-      preLoaderRoute: typeof DropUnlockRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/drop': {
@@ -118,18 +118,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DropRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/drop-unlock': {
+      id: '/drop-unlock'
+      path: '/drop-unlock'
+      fullPath: '/drop-unlock'
+      preLoaderRoute: typeof DropUnlockRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/t/$slug': {
-      id: '/t/$slug'
-      path: '/t/$slug'
-      fullPath: '/t/$slug'
-      preLoaderRoute: typeof TSlugRouteImport
+    '/c/$slug': {
+      id: '/c/$slug'
+      path: '/c/$slug'
+      fullPath: '/c/$slug'
+      preLoaderRoute: typeof CSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/d/$slug': {
@@ -139,11 +139,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/c/$slug': {
-      id: '/c/$slug'
-      path: '/c/$slug'
-      fullPath: '/c/$slug'
-      preLoaderRoute: typeof CSlugRouteImport
+    '/t/$slug': {
+      id: '/t/$slug'
+      path: '/t/$slug'
+      fullPath: '/t/$slug'
+      preLoaderRoute: typeof TSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
