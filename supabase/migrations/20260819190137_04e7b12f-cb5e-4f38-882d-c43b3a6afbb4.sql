@@ -1,0 +1,2 @@
+update public.pending_components set status='done', note='Added to registry' where url like '%feature-block-animated-card%';
+update public.pending_components set status='done', note='Added to registry' where url like '%animated-gradient-with-svg%' or url like '%cnippet.dev/text-reveal%';
