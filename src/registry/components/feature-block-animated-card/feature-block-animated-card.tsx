@@ -3,6 +3,7 @@
 import { animate, motion } from "framer-motion"
 import React, { useEffect } from "react"
 import { cn } from "@/lib/utils"
+import "./feature-block-animated-card.css"
 
 export interface AnimatedCardProps {
   className?: string
@@ -113,31 +114,43 @@ const AnimatedSparkles = () => (
   </div>
 )
 
-const Sparkles = () => {
-  const randomMove = () => Math.random() * 2 - 1
-  const randomOpacity = () => Math.random()
-  const random = () => Math.random()
+// Deterministic pseudo-random values so SSR and client markup match.
+const seeded = (n: number) => {
+  const x = Math.sin(n * 12.9898) * 43758.5453
+  return x - Math.floor(x)
+}
 
+const stars = [...Array(12)].map((_, i) => ({
+  top: seeded(i + 1) * 100,
+  left: seeded(i + 21) * 100,
+  toTop: seeded(i + 41) * 100,
+  toLeft: seeded(i + 61) * 100,
+  move: seeded(i + 81) * 2 - 1,
+  opacity: seeded(i + 101),
+  duration: seeded(i + 121) * 2 + 4,
+}))
+
+const Sparkles = () => {
   return (
     <div className="absolute inset-0">
-      {[...Array(12)].map((_, i) => (
+      {stars.map((star, i) => (
         <motion.span
           key={`star-${i}`}
           animate={{
-            top: `calc(${random() * 100}% + ${randomMove()}px)`,
-            left: `calc(${random() * 100}% + ${randomMove()}px)`,
-            opacity: randomOpacity(),
+            top: `calc(${star.toTop}% + ${star.move}px)`,
+            left: `calc(${star.toLeft}% + ${star.move}px)`,
+            opacity: star.opacity,
             scale: [1, 1.2, 0],
           }}
           transition={{
-            duration: random() * 2 + 4,
+            duration: star.duration,
             repeat: Infinity,
             ease: "linear",
           }}
           style={{
             position: "absolute",
-            top: `${random() * 100}%`,
-            left: `${random() * 100}%`,
+            top: `${star.top}%`,
+            left: `${star.left}%`,
             width: `2px`,
             height: `2px`,
             borderRadius: "50%",
