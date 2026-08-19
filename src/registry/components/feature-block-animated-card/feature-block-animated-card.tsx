@@ -52,7 +52,7 @@ export function AnimatedCard({ className, title, description, icons = [] }: Anim
   )
 }
 
-function AnimatedIcons({ icons }: { icons: AnimatedCardProps["icons"] }) {
+function AnimatedIcons({ icons = [] }: { icons: AnimatedCardProps["icons"] }) {
   const scale = [1, 1.1, 1]
   const transform = ["translateY(0px)", "translateY(-4px)", "translateY(0px)"]
   
@@ -63,7 +63,7 @@ function AnimatedIcons({ icons }: { icons: AnimatedCardProps["icons"] }) {
   ])
 
   useEffect(() => {
-    animate(sequence, {
+    animate(sequence as never, {
       repeat: Infinity,
       repeatDelay: 1,
     })
