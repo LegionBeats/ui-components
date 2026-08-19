@@ -46,6 +46,7 @@ import { rollingText } from "./components/rolling-text";
 import { scrollVelocityText } from "./components/scroll-velocity-text";
 import { animatedGradientWithSvg } from "./components/animated-gradient-with-svg";
 import { textReveal } from "./components/text-reveal";
+import { featureBlockAnimatedCard } from "./components/feature-block-animated-card";
 
 
 
@@ -58,6 +59,7 @@ import { textReveal } from "./components/text-reveal";
  *   - an `index.ts` exporting a RegistryEntry
  */
 export const registry: RegistryEntry[] = [
+  featureBlockAnimatedCard,
   textReveal,
   animatedGradientWithSvg,
   morphingButton,
