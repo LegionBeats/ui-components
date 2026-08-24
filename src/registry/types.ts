@@ -11,7 +11,7 @@ export type RegistryEntry = {
   slug: string;
   name: string;
   description: string;
-  category: "buttons" | "inputs" | "sections" | "effects" | "misc";
+  category: RegistryCategory;
   dependencies: string[];
   files: RegistryFile[];
   Preview: ComponentType;
