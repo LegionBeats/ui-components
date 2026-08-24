@@ -21,10 +21,10 @@ function Index() {
   const [tab, setTab] = useState<"components" | "designs" | "templates">(
     "components",
   );
-  const grouped = registry.reduce<Record<string, typeof registry>>((acc, e) => {
-    (acc[e.category] ||= []).push(e);
-    return acc;
-  }, {});
+  const groups = CATEGORY_ORDER.map((category) => ({
+    category,
+    items: registry.filter((e) => e.category === category),
+  })).filter((g) => g.items.length > 0);
 
   return (
     <main className="min-h-screen bg-background text-foreground">
