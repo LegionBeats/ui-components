@@ -1,5 +1,34 @@
 import type { ComponentType } from "react";
 
+/** Display order of the gallery sections. */
+export const CATEGORY_ORDER = [
+  "buttons",
+  "inputs",
+  "text",
+  "backgrounds",
+  "cards",
+  "carousels",
+  "navigation",
+  "sections",
+  "effects",
+  "misc",
+] as const;
+
+export type RegistryCategory = (typeof CATEGORY_ORDER)[number];
+
+export const CATEGORY_LABELS: Record<RegistryCategory, string> = {
+  buttons: "Buttons",
+  inputs: "Inputs & Forms",
+  text: "Text Effects",
+  backgrounds: "Backgrounds",
+  cards: "Cards & Widgets",
+  carousels: "Carousels & Galleries",
+  navigation: "Navigation & Disclosure",
+  sections: "Page Sections",
+  effects: "Visual Effects",
+  misc: "Misc",
+};
+
 export type RegistryFile = {
   name: string;
   target: string;
