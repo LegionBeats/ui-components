@@ -50,6 +50,7 @@ import { featureBlockAnimatedCard } from "./components/feature-block-animated-ca
 import { launchButton } from "./components/launch-button";
 import { smoothInput } from "./components/smooth-input";
 import { hoverExpand } from "./components/hover-expand";
+import { cardSwipe } from "./components/card-swipe";
 
 
 
@@ -62,6 +63,7 @@ import { hoverExpand } from "./components/hover-expand";
  *   - an `index.ts` exporting a RegistryEntry
  */
 export const registry: RegistryEntry[] = [
+  cardSwipe,
   hoverExpand,
   smoothInput,
   launchButton,
