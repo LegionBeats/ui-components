@@ -60,6 +60,7 @@ import { launchButton } from "./components/launch-button";
  *   - an `index.ts` exporting a RegistryEntry
  */
 export const registry: RegistryEntry[] = [
+  launchButton,
   featureBlockAnimatedCard,
   textReveal,
   animatedGradientWithSvg,
