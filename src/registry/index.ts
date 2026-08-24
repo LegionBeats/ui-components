@@ -48,6 +48,7 @@ import { animatedGradientWithSvg } from "./components/animated-gradient-with-svg
 import { textReveal } from "./components/text-reveal";
 import { featureBlockAnimatedCard } from "./components/feature-block-animated-card";
 import { launchButton } from "./components/launch-button";
+import { smoothInput } from "./components/smooth-input";
 
 
 
@@ -60,6 +61,7 @@ import { launchButton } from "./components/launch-button";
  *   - an `index.ts` exporting a RegistryEntry
  */
 export const registry: RegistryEntry[] = [
+  smoothInput,
   launchButton,
   featureBlockAnimatedCard,
   textReveal,
