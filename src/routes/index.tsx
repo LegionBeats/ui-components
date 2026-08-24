@@ -69,10 +69,13 @@ function Index() {
 
       <section className="mx-auto max-w-6xl px-6 py-10">
         {tab === "components" &&
-          Object.entries(grouped).map(([category, items]) => (
+          groups.map(({ category, items }) => (
           <div key={category} className="mb-12">
-            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-              {category}
+            <h2 className="mb-4 flex items-baseline gap-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+              {CATEGORY_LABELS[category]}
+              <span className="text-xs font-normal normal-case tracking-normal opacity-70">
+                {items.length}
+              </span>
             </h2>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {items.map((entry) => (
