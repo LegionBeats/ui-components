@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { registry } from "@/registry";
+import { CATEGORY_ORDER, CATEGORY_LABELS } from "@/registry/types";
 import { designRegistry } from "@/registry/designs";
 import { templateRegistry } from "@/registry/templates";
 
