@@ -8,7 +8,7 @@ export const collapsible7: RegistryEntry = {
   name: "Collapsible 7",
   description:
     "FAQ-style collapsible card that expands to reveal answer text and a wide cover image. Built on shadcn collapsible + card.",
-  category: "sections",
+  category: "navigation",
   dependencies: ["lucide-react"],
   shadcnCommand:
     "npx shadcn@latest add https://registry.watermelon.sh/r/collapsible-7.json",

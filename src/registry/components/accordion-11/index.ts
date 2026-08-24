@@ -8,7 +8,7 @@ export const accordion11: RegistryEntry = {
   name: "Accordion 11",
   description:
     "Bordered accordion variant with chevron toggle indicators and highlighted expanded state. Built on shadcn's accordion primitive.",
-  category: "sections",
+  category: "navigation",
   dependencies: ["react-icons", "@radix-ui/react-accordion", "lucide-react"],
   shadcnCommand:
     "npx shadcn@latest add https://registry.watermelon.sh/r/accordion-11.json",

@@ -8,7 +8,7 @@ export const scrollVelocityText: RegistryEntry = {
   name: "Scroll Velocity Text",
   description:
     "A looping text marquee whose speed and direction react to scroll velocity, with reduced-motion and offscreen pausing built in.",
-  category: "effects",
+  category: "text",
   dependencies: ["motion"],
   shadcnCommand: "npx shadcn@latest add @cnippet/scroll-velocity-text",
   sourceUrl: "https://ui.cnippet.dev",

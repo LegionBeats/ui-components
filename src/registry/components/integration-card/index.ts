@@ -8,7 +8,7 @@ export const integrationCard: RegistryEntry = {
   name: "Integration Card",
   description:
     "Searchable, paginated integrations picker with animated expandable rows. Framer Motion + lucide.",
-  category: "sections",
+  category: "cards",
   dependencies: ["framer-motion", "react-icons", "lucide-react"],
   shadcnCommand:
     "npx shadcn@latest add https://registry.watermelon.sh/r/integration-card.json",

@@ -8,7 +8,7 @@ export const textReveal: RegistryEntry = {
   name: "Text Reveal",
   description:
     "Reveals text by word, character, or line with fade, slide, scale, and blur presets. Motion-powered.",
-  category: "effects",
+  category: "text",
   dependencies: ["motion"],
   shadcnCommand: "npx shadcn@latest add @cnippet/text-reveal",
   sourceUrl: "https://ui.cnippet.dev",

@@ -8,7 +8,7 @@ export const countingNumber: RegistryEntry = {
   name: "Counting Number",
   description:
     "Animates from a start value to a target number with a tween, formatted with thousands separators. Replayable via ref.",
-  category: "effects",
+  category: "text",
   dependencies: ["motion"],
   shadcnCommand: "npx shadcn@latest add @cnippet/counting-number",
   sourceUrl: "https://ui.cnippet.dev",

@@ -8,7 +8,7 @@ export const hoverExpand: RegistryEntry = {
   name: "Hover Expand Gallery",
   description:
     "A row of slim image cards that smoothly expand on hover or tap, revealing a gradient overlay and caption for the active image.",
-  category: "sections",
+  category: "carousels",
   dependencies: ["framer-motion"],
   files: [
     {

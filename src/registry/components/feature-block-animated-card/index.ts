@@ -9,7 +9,7 @@ export const featureBlockAnimatedCard: RegistryEntry = {
   name: "Feature Block Animated Card",
   description:
     "Feature card with pulsing icon row, a sweeping cyan scan line, and drifting sparkles. Great for bento/feature grids.",
-  category: "sections",
+  category: "cards",
   dependencies: ["framer-motion", "lucide-react"],
   shadcnCommand:
     "npx shadcn@latest add https://21st.dev/r/manuarora700/feature-block-animated-card",

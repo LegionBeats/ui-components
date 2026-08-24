@@ -8,7 +8,7 @@ export const dotGridBg: RegistryEntry = {
   name: "Dot Grid Background",
   description:
     "A dark dot-grid background made of tiny radial-gradient dots. Perfect for sci-fi dashboards or code-heavy interfaces.",
-  category: "effects",
+  category: "backgrounds",
   dependencies: [],
   files: [
     {

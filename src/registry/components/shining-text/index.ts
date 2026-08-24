@@ -8,7 +8,7 @@ export const shiningText: RegistryEntry = {
   name: "Shining Text",
   description:
     "Text with a looping shine sweep driven by an animated gradient background clip. Motion-powered.",
-  category: "effects",
+  category: "text",
   dependencies: ["motion"],
   shadcnCommand:
     "npx shadcn@latest add https://21st.dev/r/preetsuthar17/shining-text",

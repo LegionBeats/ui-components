@@ -8,7 +8,7 @@ export const rollingText: RegistryEntry = {
   name: "Rolling Text",
   description:
     "Letters roll in one by one with a 3D perspective flip — configurable direction, stagger and easing.",
-  category: "effects",
+  category: "text",
   dependencies: ["motion"],
   shadcnCommand: "npx shadcn@latest add @cnippet/rolling-text",
   sourceUrl: "https://ui.cnippet.dev",

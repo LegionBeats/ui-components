@@ -12,7 +12,7 @@ export const vCard6: RegistryEntry = {
   name: "Card 6",
   description:
     "A card with image, badge, description, and CTA button. From Cnippet UI.",
-  category: "misc",
+  category: "cards",
   dependencies: ["@base-ui/react", "class-variance-authority"],
   shadcnCommand: "npx shadcn@latest add @cnippet/v-card-6",
   sourceUrl: "https://ui.cnippet.dev/r/v-card-6.json",

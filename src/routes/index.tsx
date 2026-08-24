@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { registry } from "@/registry";
+import { CATEGORY_ORDER, CATEGORY_LABELS } from "@/registry/types";
 import { designRegistry } from "@/registry/designs";
 import { templateRegistry } from "@/registry/templates";
 
@@ -21,10 +22,10 @@ function Index() {
   const [tab, setTab] = useState<"components" | "designs" | "templates">(
     "components",
   );
-  const grouped = registry.reduce<Record<string, typeof registry>>((acc, e) => {
-    (acc[e.category] ||= []).push(e);
-    return acc;
-  }, {});
+  const groups = CATEGORY_ORDER.map((category) => ({
+    category,
+    items: registry.filter((e) => e.category === category),
+  })).filter((g) => g.items.length > 0);
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -68,10 +69,13 @@ function Index() {
 
       <section className="mx-auto max-w-6xl px-6 py-10">
         {tab === "components" &&
-          Object.entries(grouped).map(([category, items]) => (
+          groups.map(({ category, items }) => (
           <div key={category} className="mb-12">
-            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-              {category}
+            <h2 className="mb-4 flex items-baseline gap-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+              {CATEGORY_LABELS[category]}
+              <span className="text-xs font-normal normal-case tracking-normal opacity-70">
+                {items.length}
+              </span>
             </h2>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {items.map((entry) => (

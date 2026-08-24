@@ -8,7 +8,7 @@ export const textBlurIn: RegistryEntry = {
   name: "Text Blur In",
   description:
     "Text that fades and un-blurs into place, staggered by word or character. Lightweight Motion animation.",
-  category: "effects",
+  category: "text",
   dependencies: ["motion"],
   shadcnCommand: "npx shadcn@latest add https://21st.dev/r/animbits/text-blur-in",
   sourceUrl: "https://21st.dev/r/animbits/text-blur-in",

@@ -8,7 +8,7 @@ export const purpleRadialBg: RegistryEntry = {
   name: "Purple Radial Background",
   description:
     "A deep purple radial gradient that fades from black at the center to electric purple at the edges.",
-  category: "effects",
+  category: "backgrounds",
   dependencies: [],
   files: [
     {

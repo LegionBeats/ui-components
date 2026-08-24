@@ -8,7 +8,7 @@ export const cardSwipe: RegistryEntry = {
   name: "Card Swipe Carousel",
   description:
     "A stacked card carousel built on Swiper's cards effect, with grab-to-drag gestures, looping, optional autoplay, pagination and navigation arrows.",
-  category: "sections",
+  category: "carousels",
   dependencies: ["swiper", "framer-motion", "lucide-react"],
   files: [
     {
