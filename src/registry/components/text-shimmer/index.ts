@@ -8,7 +8,7 @@ export const textShimmer: RegistryEntry = {
   name: "Text Shimmer",
   description:
     "A gradient shine sweeps across text continuously — great for loading and thinking states. Motion-powered.",
-  category: "effects",
+  category: "text",
   dependencies: ["motion"],
   shadcnCommand: "npx shadcn@latest add @cnippet/text-shimmer",
   sourceUrl: "https://ui.cnippet.dev",

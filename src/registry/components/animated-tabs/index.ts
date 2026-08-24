@@ -8,7 +8,7 @@ export const animatedTabs: RegistryEntry = {
   name: "Animated Tabs",
   description:
     "Dark glass-morphism tabs with a spring-animated active pill and blur-in content transitions.",
-  category: "sections",
+  category: "navigation",
   dependencies: ["framer-motion"],
   shadcnCommand:
     "npx shadcn@latest add https://21st.dev/r/chetanverma16/animated-tabs",

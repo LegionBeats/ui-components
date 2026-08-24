@@ -8,7 +8,7 @@ export const textHighlight: RegistryEntry = {
   name: "Text Highlight",
   description:
     "A marker-style background sweeps behind text on hover, in view, or via ref — with ltr, rtl, ttb and btt directions.",
-  category: "effects",
+  category: "text",
   dependencies: ["motion"],
   shadcnCommand: "npx shadcn@latest add @cnippet/text-highlight",
   sourceUrl: "https://ui.cnippet.dev",

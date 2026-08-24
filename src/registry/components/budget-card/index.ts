@@ -8,7 +8,7 @@ export const budgetCard: RegistryEntry = {
   name: "Budget Card",
   description:
     "Animated monthly budget card with spend breakdown, month picker, and expandable details. Motion-powered.",
-  category: "sections",
+  category: "cards",
   dependencies: ["motion", "lucide-react"],
   shadcnCommand:
     "npx shadcn@latest add https://registry.watermelon.sh/r/budget-card.json",

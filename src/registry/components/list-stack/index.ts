@@ -8,7 +8,7 @@ export const listStack: RegistryEntry = {
   name: "List Stack",
   description:
     "Stacked activity cards in 3D perspective that fan out into a list when expanded. Spring-animated with Framer Motion.",
-  category: "sections",
+  category: "carousels",
   dependencies: ["framer-motion", "react-icons"],
   shadcnCommand:
     "npx shadcn@latest add https://registry.watermelon.sh/r/list-stack.json",

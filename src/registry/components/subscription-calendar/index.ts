@@ -8,7 +8,7 @@ export const subscriptionCalendar: RegistryEntry = {
   name: "Subscription Calendar",
   description:
     "Animated monthly subscription calendar with day indicators, search, add, and summary states.",
-  category: "sections",
+  category: "cards",
   dependencies: ["motion", "react-icons", "lucide-react"],
   shadcnCommand:
     "npx shadcn@latest add https://registry.watermelon.sh/r/subscription-calendar.json",

@@ -11,7 +11,7 @@ export const vCard8: RegistryEntry = {
   name: "Card 8",
   description:
     "Full-bleed image profile card with top/bottom shadow fades, verified avatar and hover zoom. From Cnippet UI.",
-  category: "misc",
+  category: "cards",
   dependencies: ["@base-ui/react", "class-variance-authority"],
   shadcnCommand: "npx shadcn@latest add @cnippet/v-card-8",
   sourceUrl: "https://ui.cnippet.dev/r/v-card-8.json",

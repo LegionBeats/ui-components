@@ -8,7 +8,7 @@ export const mScrollProgress3: RegistryEntry = {
   name: "Scroll Progress 3",
   description:
     "Styled bar with percentage — rounded gradient bar with live percentage label. From Cnippet UI.",
-  category: "misc",
+  category: "effects",
   dependencies: ["motion"],
   shadcnCommand: "npx shadcn@latest add @cnippet/m-scroll-progress-3",
   sourceUrl: "https://ui.cnippet.dev/r/m-scroll-progress-3.json",

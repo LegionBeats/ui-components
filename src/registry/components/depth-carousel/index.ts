@@ -8,7 +8,7 @@ export const depthCarousel: RegistryEntry = {
   name: "Depth Carousel",
   description:
     "GSAP-powered 3D depth carousel with drag, autoplay, blur falloff, tilt, controls, and indicators.",
-  category: "sections",
+  category: "carousels",
   dependencies: ["gsap"],
   sourceUrl: "https://reactbits.dev",
   author: { name: "React Bits", url: "https://reactbits.dev" },

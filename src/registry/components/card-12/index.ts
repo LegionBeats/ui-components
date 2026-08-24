@@ -8,7 +8,7 @@ export const card12: RegistryEntry = {
   name: "Card 12",
   description:
     "Product card with hero image, like button, size/color badges, price, and CTA. Built on shadcn card primitives.",
-  category: "sections",
+  category: "cards",
   dependencies: ["lucide-react", "motion"],
   shadcnCommand:
     "npx shadcn@latest add https://registry.watermelon.sh/r/card-12.json",

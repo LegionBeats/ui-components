@@ -9,7 +9,7 @@ export const vCard7: RegistryEntry = {
   name: "Card 7",
   description:
     "A full-bleed image card with scale-on-hover effect and gradient overlay. From Cnippet UI.",
-  category: "misc",
+  category: "cards",
   dependencies: ["@base-ui/react"],
   shadcnCommand: "npx shadcn@latest add @cnippet/v-card-7",
   sourceUrl: "https://ui.cnippet.dev/r/v-card-7.json",

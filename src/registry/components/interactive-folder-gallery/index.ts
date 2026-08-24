@@ -8,7 +8,7 @@ export const interactiveFolderGallery: RegistryEntry = {
   name: "Interactive Folder Gallery",
   description:
     "A macOS-style folder that opens on click and fans out a stack of draggable photos. Drag a photo down to close.",
-  category: "sections",
+  category: "carousels",
   dependencies: ["framer-motion"],
   files: [
     {

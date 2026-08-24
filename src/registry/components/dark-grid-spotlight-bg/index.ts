@@ -8,7 +8,7 @@ export const darkGridSpotlightBg: RegistryEntry = {
   name: "Dark Grid Spotlight Background",
   description:
     "A dark grid background with a large radial spotlight at the top. Creates a dramatic, stage-lit feel for dark-themed pages.",
-  category: "effects",
+  category: "backgrounds",
   dependencies: [],
   files: [
     {

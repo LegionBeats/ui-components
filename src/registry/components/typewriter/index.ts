@@ -8,7 +8,7 @@ export const typewriter: RegistryEntry = {
   name: "Typewriter",
   description:
     "Characters appear one by one with an optional blinking cursor, looping through multiple strings with delete/retype.",
-  category: "effects",
+  category: "text",
   dependencies: ["motion"],
   shadcnCommand: "npx shadcn@latest add @cnippet/typewriter",
   sourceUrl: "https://ui.cnippet.dev",

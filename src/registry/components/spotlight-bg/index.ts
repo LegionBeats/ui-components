@@ -8,7 +8,7 @@ export const spotlightBg: RegistryEntry = {
   name: "Spotlight Background",
   description:
     "A dark slate-950 wrapper with a centered radial gradient spotlight. Great for hero sections or card backdrops.",
-  category: "effects",
+  category: "backgrounds",
   dependencies: [],
   files: [
     {

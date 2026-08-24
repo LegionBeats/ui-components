@@ -8,7 +8,7 @@ export const gridGlowBg: RegistryEntry = {
   name: "Grid Glow Background",
   description:
     "A light grid background with a soft fuchsia glow behind it. Great for landing pages that need a subtle tech texture.",
-  category: "effects",
+  category: "backgrounds",
   dependencies: [],
   files: [
     {
