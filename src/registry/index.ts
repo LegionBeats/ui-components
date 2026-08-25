@@ -46,6 +46,7 @@ import { rollingText } from "./components/rolling-text";
 import { scrollVelocityText } from "./components/scroll-velocity-text";
 import { animatedGradientWithSvg } from "./components/animated-gradient-with-svg";
 import { textReveal } from "./components/text-reveal";
+import { textRotate } from "./components/text-rotate";
 import { featureBlockAnimatedCard } from "./components/feature-block-animated-card";
 import { launchButton } from "./components/launch-button";
 import { smoothInput } from "./components/smooth-input";
@@ -69,6 +70,7 @@ export const registry: RegistryEntry[] = [
   launchButton,
   featureBlockAnimatedCard,
   textReveal,
+  textRotate,
   animatedGradientWithSvg,
   morphingButton,
   interactiveFolderGallery,
