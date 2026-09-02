@@ -68,6 +68,7 @@ import { animatedBeam } from "./components/animated-beam";
  *   - an `index.ts` exporting a RegistryEntry
  */
 export const registry: RegistryEntry[] = [
+  animatedBeam,
   interactiveTimeline,
   cCard7,
   testimonials3d,
