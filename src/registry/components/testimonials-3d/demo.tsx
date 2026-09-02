@@ -89,8 +89,8 @@ export default function Testimonials3dDemo() {
             pauseOnHover
             reverse={i % 2 === 1}
             repeat={2}
-            className="h-[480px] [--duration:30s]"
-            style={{ animationDuration: `${26 + i * 6}s` } as React.CSSProperties}
+            className="h-[480px]"
+            style={{ "--duration": `${26 + i * 6}s` } as React.CSSProperties}
           >
             {col.map((t) => (
               <TestimonialCard key={t.name} {...t} />
