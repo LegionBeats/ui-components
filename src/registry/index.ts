@@ -55,6 +55,7 @@ import { cardSwipe } from "./components/card-swipe";
 import { testimonials3d } from "./components/testimonials-3d";
 import { cCard7 } from "./components/c-card-7";
 import { interactiveTimeline } from "./components/interactive-timeline";
+import { animatedBeam } from "./components/animated-beam";
 
 
 
