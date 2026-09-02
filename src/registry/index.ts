@@ -54,6 +54,7 @@ import { hoverExpand } from "./components/hover-expand";
 import { cardSwipe } from "./components/card-swipe";
 import { testimonials3d } from "./components/testimonials-3d";
 import { cCard7 } from "./components/c-card-7";
+import { interactiveTimeline } from "./components/interactive-timeline";
 
 
 
@@ -66,6 +67,7 @@ import { cCard7 } from "./components/c-card-7";
  *   - an `index.ts` exporting a RegistryEntry
  */
 export const registry: RegistryEntry[] = [
+  interactiveTimeline,
   cCard7,
   testimonials3d,
   cardSwipe,
