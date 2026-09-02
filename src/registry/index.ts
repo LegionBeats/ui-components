@@ -65,6 +65,7 @@ import { testimonials3d } from "./components/testimonials-3d";
  *   - an `index.ts` exporting a RegistryEntry
  */
 export const registry: RegistryEntry[] = [
+  testimonials3d,
   cardSwipe,
   hoverExpand,
   smoothInput,
