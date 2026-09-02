@@ -67,6 +67,7 @@ import { interactiveTimeline } from "./components/interactive-timeline";
  *   - an `index.ts` exporting a RegistryEntry
  */
 export const registry: RegistryEntry[] = [
+  interactiveTimeline,
   cCard7,
   testimonials3d,
   cardSwipe,
