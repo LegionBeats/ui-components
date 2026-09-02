@@ -52,6 +52,7 @@ import { launchButton } from "./components/launch-button";
 import { smoothInput } from "./components/smooth-input";
 import { hoverExpand } from "./components/hover-expand";
 import { cardSwipe } from "./components/card-swipe";
+import { testimonials3d } from "./components/testimonials-3d";
 
 
 
@@ -64,6 +65,7 @@ import { cardSwipe } from "./components/card-swipe";
  *   - an `index.ts` exporting a RegistryEntry
  */
 export const registry: RegistryEntry[] = [
+  testimonials3d,
   cardSwipe,
   hoverExpand,
   smoothInput,
