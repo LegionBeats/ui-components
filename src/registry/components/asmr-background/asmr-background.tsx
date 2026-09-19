@@ -21,6 +21,7 @@ export function AsmrBackground({
 
     const context = canvas.getContext("2d");
     if (!context) return;
+    const ctx = context;
 
     let width = 0;
     let height = 0;
@@ -92,24 +93,24 @@ export function AsmrBackground({
       }
 
       draw() {
-        context.save();
-        context.translate(this.x, this.y);
-        context.rotate(this.rotation);
-        context.fillStyle = `rgba(${this.color}, ${Math.min(this.alpha + this.frictionGlow, 0.9)})`;
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+        ctx.fillStyle = `rgba(${this.color}, ${Math.min(this.alpha + this.frictionGlow, 0.9)})`;
 
         if (this.frictionGlow > 0.3) {
-          context.shadowBlur = 8 * this.frictionGlow;
-          context.shadowColor = `rgba(180, 220, 255, ${this.frictionGlow})`;
+          ctx.shadowBlur = 8 * this.frictionGlow;
+          ctx.shadowColor = `rgba(180, 220, 255, ${this.frictionGlow})`;
         }
 
-        context.beginPath();
-        context.moveTo(0, -this.size * 2.5);
-        context.lineTo(this.size, 0);
-        context.lineTo(0, this.size * 2.5);
-        context.lineTo(-this.size, 0);
-        context.closePath();
-        context.fill();
-        context.restore();
+        ctx.beginPath();
+        ctx.moveTo(0, -this.size * 2.5);
+        ctx.lineTo(this.size, 0);
+        ctx.lineTo(0, this.size * 2.5);
+        ctx.lineTo(-this.size, 0);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
       }
     }
 
@@ -122,13 +123,13 @@ export function AsmrBackground({
       canvas.height = Math.max(1, Math.round(height * pixelRatio));
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
-      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
       particles = Array.from({ length: particleCount }, () => new Particle());
     };
 
     const draw = () => {
-      context.fillStyle = "rgba(10, 10, 12, 0.18)";
-      context.fillRect(0, 0, width, height);
+      ctx.fillStyle = "rgba(10, 10, 12, 0.18)";
+      ctx.fillRect(0, 0, width, height);
       particles.forEach((particle) => {
         if (!reduceMotion) particle.update();
         particle.draw();
