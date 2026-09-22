@@ -57,6 +57,7 @@ import { cCard7 } from "./components/c-card-7";
 import { interactiveTimeline } from "./components/interactive-timeline";
 import { animatedBeam } from "./components/animated-beam";
 import { asmrBackground } from "./components/asmr-background";
+import { leverSwitch } from "./components/lever-switch";
 
 
 
@@ -69,6 +70,7 @@ import { asmrBackground } from "./components/asmr-background";
  *   - an `index.ts` exporting a RegistryEntry
  */
 export const registry: RegistryEntry[] = [
+  leverSwitch,
   asmrBackground,
   animatedBeam,
   interactiveTimeline,
