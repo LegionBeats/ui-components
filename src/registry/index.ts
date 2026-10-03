@@ -58,6 +58,7 @@ import { interactiveTimeline } from "./components/interactive-timeline";
 import { animatedBeam } from "./components/animated-beam";
 import { asmrBackground } from "./components/asmr-background";
 import { leverSwitch } from "./components/lever-switch";
+import { gradientDots } from "./components/gradient-dots";
 
 
 
@@ -70,6 +71,7 @@ import { leverSwitch } from "./components/lever-switch";
  *   - an `index.ts` exporting a RegistryEntry
  */
 export const registry: RegistryEntry[] = [
+  gradientDots,
   leverSwitch,
   asmrBackground,
   animatedBeam,
