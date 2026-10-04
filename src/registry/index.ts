@@ -59,6 +59,7 @@ import { animatedBeam } from "./components/animated-beam";
 import { asmrBackground } from "./components/asmr-background";
 import { leverSwitch } from "./components/lever-switch";
 import { gradientDots } from "./components/gradient-dots";
+import { featuresCard } from "./components/features-card";
 
 
 

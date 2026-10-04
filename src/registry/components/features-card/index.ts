@@ -10,8 +10,6 @@ export const featuresCard: RegistryEntry = {
     "A dark bento-grid features section with interactive feature tabs, live metrics, integrations grid, and a terminal deploy demo.",
   category: "sections",
   dependencies: ["lucide-react"],
-  sourceUrl: "https://ui-components.dev",
-  author: undefined,
   files: [
     {
       name: "features-card.tsx",
