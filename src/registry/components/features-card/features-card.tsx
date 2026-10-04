@@ -287,3 +287,6 @@ await app.deploy();
     </section>
   );
 };
+
+export default Component;
+
