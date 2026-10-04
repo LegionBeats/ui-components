@@ -72,6 +72,7 @@ import { featuresCard } from "./components/features-card";
  *   - an `index.ts` exporting a RegistryEntry
  */
 export const registry: RegistryEntry[] = [
+  featuresCard,
   gradientDots,
   leverSwitch,
   asmrBackground,
