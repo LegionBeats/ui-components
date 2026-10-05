@@ -73,6 +73,7 @@ import { pixelCanvas } from "./components/pixel-canvas";
  *   - an `index.ts` exporting a RegistryEntry
  */
 export const registry: RegistryEntry[] = [
+  pixelCanvas,
   featuresCard,
   gradientDots,
   leverSwitch,
