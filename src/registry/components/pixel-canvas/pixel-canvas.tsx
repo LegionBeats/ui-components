@@ -330,7 +330,7 @@ class PixelCanvasElement extends HTMLElement {
 // React-компонент обертка
 import * as React from "react"
 
-declare global {
+declare module "react" {
   namespace JSX {
     interface IntrinsicElements {
       "pixel-canvas": React.DetailedHTMLProps<
