@@ -116,7 +116,11 @@ class Pixel {
 }
 
 // Затем определяем веб-компонент
-class PixelCanvasElement extends HTMLElement {
+// Base class resolved at runtime so SSR (no HTMLElement) doesn't crash on import.
+const BaseHTMLElement: typeof HTMLElement =
+  typeof HTMLElement !== "undefined" ? HTMLElement : (class {} as never);
+
+class PixelCanvasElement extends BaseHTMLElement {
   private canvas: HTMLCanvasElement
   private ctx: CanvasRenderingContext2D | null
   private pixels: Pixel[] = []
