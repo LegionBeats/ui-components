@@ -60,6 +60,7 @@ import { asmrBackground } from "./components/asmr-background";
 import { leverSwitch } from "./components/lever-switch";
 import { gradientDots } from "./components/gradient-dots";
 import { featuresCard } from "./components/features-card";
+import { pixelCanvas } from "./components/pixel-canvas";
 
 
 
@@ -72,6 +73,7 @@ import { featuresCard } from "./components/features-card";
  *   - an `index.ts` exporting a RegistryEntry
  */
 export const registry: RegistryEntry[] = [
+  pixelCanvas,
   featuresCard,
   gradientDots,
   leverSwitch,
