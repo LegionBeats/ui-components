@@ -63,6 +63,7 @@ import { featuresCard } from "./components/features-card";
 import { pixelCanvas } from "./components/pixel-canvas";
 import { mContainerScroll3 } from "./components/m-container-scroll-3";
 import { mScrollSnapSections1 } from "./components/m-scroll-snap-sections-1";
+import { mScrollImageReveal2 } from "./components/m-scroll-image-reveal-2";
 
 
 
@@ -75,6 +76,7 @@ import { mScrollSnapSections1 } from "./components/m-scroll-snap-sections-1";
  *   - an `index.ts` exporting a RegistryEntry
  */
 export const registry: RegistryEntry[] = [
+  mScrollImageReveal2,
   mScrollSnapSections1,
   mContainerScroll3,
   pixelCanvas,
