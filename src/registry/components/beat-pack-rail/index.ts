@@ -19,7 +19,7 @@ const images = {
 export const beatPackRail: RegistryEntry = {
   slug: "beat-pack-rail",
   name: "Beat Pack Rail",
-  description: "Vinyl, tapes and boxed beat packs clipped to a wire — records slide out on hover, and tapping opens a spinning-record detail view.",
+  description: "Vinyl and tape beat packs clipped to a draggable wire — records slide out and tape cases swing open on hover; tapping opens a detail view with a Learn more button.",
   category: "carousels",
   dependencies: [],
   files: [
