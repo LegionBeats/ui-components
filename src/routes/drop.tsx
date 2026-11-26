@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
@@ -51,32 +51,26 @@ function extractUrl(input: string): string {
 function ImporterPage() {
   const router = useRouter();
   const lock = useServerFn(lockDrop);
+  const readQueue = useServerFn(requireDropUnlocked);
+  const initialQueue = Route.useLoaderData();
   const [input, setInput] = useState("");
   const [note, setNote] = useState("");
   const [type, setType] = useState<"component" | "design" | "template">(
     "component",
   );
-  const [rows, setRows] = useState<PendingRow[]>([]);
+  const [rows, setRows] = useState<PendingRow[]>(initialQueue.rows);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
   async function load() {
-    const { data, error } = await supabase
-      .from("pending_components")
-      .select("id, url, note, status, created_at, type")
-      .order("created_at", { ascending: false })
-      .limit(100);
-    if (error) {
-      setError(error.message);
-      return;
+    try {
+      const queue = await readQueue();
+      setRows(queue.rows);
+    } catch {
+      setError("Unable to load the component queue.");
     }
-    setRows((data ?? []) as PendingRow[]);
   }
-
-  useEffect(() => {
-    load();
-  }, []);
 
   async function handleAdd() {
     setError(null);

@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { useSession } from "@tanstack/react-start/server";
+import { setResponseHeader, useSession } from "@tanstack/react-start/server";
 import { redirect } from "@tanstack/react-router";
 import { createHash, timingSafeEqual } from "node:crypto";
 
@@ -33,7 +33,15 @@ export const requireDropUnlocked = createServerFn({ method: "GET" }).handler(
     if (!session.data.unlocked) {
       throw redirect({ to: "/drop-unlock" });
     }
-    return { ok: true as const };
+    setResponseHeader("Cache-Control", "private, no-store");
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data, error } = await supabaseAdmin
+      .from("pending_components")
+      .select("id, url, note, status, created_at, type")
+      .order("created_at", { ascending: false })
+      .limit(100);
+    if (error) throw new Error("Unable to load the component queue.");
+    return { ok: true as const, rows: data ?? [] };
   },
 );
 
