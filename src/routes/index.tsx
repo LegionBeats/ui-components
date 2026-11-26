@@ -13,6 +13,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "A personal stash of cool UI components, ready to copy into any project." },
       { property: "og:title", content: "Stash — Component Library" },
       { property: "og:description", content: "A personal stash of cool UI components, ready to copy into any project." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Index,

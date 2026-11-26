@@ -16,6 +16,10 @@ export const Route = createFileRoute("/t/$slug")({
       meta: [
         { title: t ? `${t.name} — Template` : "Template" },
         { name: "description", content: t?.description ?? "Page template" },
+        { property: "og:title", content: t ? `${t.name} — Stash Template` : "Stash Templates" },
+        { property: "og:description", content: t?.description ?? "Reusable page templates from Stash." },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary" },
       ],
     };
   },

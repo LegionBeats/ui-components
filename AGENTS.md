@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Registry variants include their shared animation source in exported files, so manual installs do not depend on the original registry's internal paths.

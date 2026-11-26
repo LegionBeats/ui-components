@@ -10,6 +10,11 @@ export const Route = createFileRoute("/drop")({
   head: () => ({
     meta: [
       { title: "Component Queue" },
+      { name: "description", content: "Stash’s private component import queue." },
+      { property: "og:title", content: "Component Queue — Stash" },
+      { property: "og:description", content: "Stash’s private component import queue." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),

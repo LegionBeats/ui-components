@@ -7,6 +7,11 @@ export const Route = createFileRoute("/drop-unlock")({
   head: () => ({
     meta: [
       { title: "Unlock" },
+      { name: "description", content: "Unlock the private Stash component queue." },
+      { property: "og:title", content: "Unlock Queue — Stash" },
+      { property: "og:description", content: "Unlock the private Stash component queue." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),

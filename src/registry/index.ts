@@ -61,6 +61,7 @@ import { leverSwitch } from "./components/lever-switch";
 import { gradientDots } from "./components/gradient-dots";
 import { featuresCard } from "./components/features-card";
 import { pixelCanvas } from "./components/pixel-canvas";
+import { mContainerScroll3 } from "./components/m-container-scroll-3";
 
 
 
@@ -73,6 +74,7 @@ import { pixelCanvas } from "./components/pixel-canvas";
  *   - an `index.ts` exporting a RegistryEntry
  */
 export const registry: RegistryEntry[] = [
+  mContainerScroll3,
   pixelCanvas,
   featuresCard,
   gradientDots,
