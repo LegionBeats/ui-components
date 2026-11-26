@@ -56,7 +56,7 @@ function Cassette() {
   );
 }
 
-function PackItem({ pack, index, onOpen }: { pack: BeatPack; index: number; onOpen: () => void }) {
+function PackItem({ pack, index, onOpen }: { pack: BeatPack; index: number; onOpen: (r: DOMRect) => void }) {
   const isTape = pack.format === "tape";
   const [swing, setSwing] = useState(0);
   const style = {
@@ -68,11 +68,11 @@ function PackItem({ pack, index, onOpen }: { pack: BeatPack; index: number; onOp
       <Clip />
       <button
         type="button"
-        onClick={onOpen}
+        onClick={(e) => onOpen(e.currentTarget.getBoundingClientRect())}
         onMouseEnter={() => setSwing(index % 2 ? 4 : -4)}
         onMouseLeave={() => setSwing(0)}
         aria-label={`Open ${pack.name}`}
-        className="group relative origin-top transition-transform duration-500 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="group relative cursor-pointer origin-top transition-transform duration-500 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         style={style}
       >
         {pack.format === "vinyl" && (
@@ -94,22 +94,35 @@ function PackItem({ pack, index, onOpen }: { pack: BeatPack; index: number; onOp
         <span className="absolute -bottom-3 right-2 rotate-3 rounded-sm bg-primary px-2 py-0.5 text-xs font-bold text-primary-foreground shadow">
           {pack.tag}
         </span>
+        <span className="pointer-events-none absolute -bottom-10 left-1/2 -translate-x-1/2 translate-y-1 rounded-full bg-primary px-3 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-primary-foreground opacity-0 shadow transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:opacity-100">
+          Open
+        </span>
       </button>
     </div>
   );
 }
 
-function Detail({ pack, onClose }: { pack: BeatPack; onClose: () => void }) {
+function Detail({ pack, from, onClose }: { pack: BeatPack; from: DOMRect | null; onClose: () => void }) {
+  const [shown, setShown] = useState(false);
+  useEffect(() => {
+    const id = requestAnimationFrame(() => requestAnimationFrame(() => setShown(true)));
+    return () => cancelAnimationFrame(id);
+  }, []);
+  // Card grows out of the pack that was clicked.
+  const start = from
+    ? `translate(${from.left + from.width / 2 - window.innerWidth / 2}px, ${from.top + from.height / 2 - window.innerHeight / 2}px) scale(0.25) rotate(-6deg)`
+    : "scale(0.9)";
   useEffect(() => {
     const k = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", k);
     return () => window.removeEventListener("keydown", k);
   }, [onClose]);
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/85 p-4 backdrop-blur-sm" onClick={onClose}>
+    <div className={`fixed inset-0 z-50 flex items-center justify-center bg-background/85 p-4 backdrop-blur-sm transition-opacity duration-300 ${shown ? "opacity-100" : "opacity-0"}`} onClick={onClose}>
       <div
         role="dialog"
         aria-label={pack.name}
+        style={{ transform: shown ? "none" : start, opacity: shown ? 1 : 0, transition: "transform 550ms cubic-bezier(.2,1.3,.4,1), opacity 250ms ease-out" }}
         className="grid w-full max-w-3xl gap-6 rounded-xl border border-border bg-card p-6 text-card-foreground shadow-2xl sm:grid-cols-2"
         onClick={(e) => e.stopPropagation()}
       >
@@ -149,6 +162,7 @@ function Detail({ pack, onClose }: { pack: BeatPack; onClose: () => void }) {
 
 export function BeatPackRail({ packs, title = "The Crate" }: { packs: BeatPack[]; title?: string }) {
   const [open, setOpen] = useState<BeatPack | null>(null);
+  const [from, setFrom] = useState<DOMRect | null>(null);
   const rail = useRef<HTMLDivElement>(null);
   const drag = useRef({ down: false, x: 0, left: 0, moved: 0 });
   const onPointerDown = (e: PointerEvent) => {
@@ -186,14 +200,14 @@ export function BeatPackRail({ packs, title = "The Crate" }: { packs: BeatPack[]
           onPointerLeave={endDrag}
           onClickCapture={onClickCapture}
           onDragStart={(e) => e.preventDefault()}
-          className="flex cursor-grab select-none items-start gap-16 overflow-x-auto px-10 pb-10 pt-0 active:cursor-grabbing [scrollbar-width:thin]"
+          className="flex cursor-grab select-none items-start gap-16 overflow-x-auto px-10 pb-14 pt-0 active:cursor-grabbing [scrollbar-width:thin]"
         >
           {packs.map((p, i) => (
-            <PackItem key={p.id} pack={p} index={i} onOpen={() => setOpen(p)} />
+            <PackItem key={p.id} pack={p} index={i} onOpen={(r) => { setFrom(r); setOpen(p); }} />
           ))}
         </div>
       </div>
-      {open && <Detail pack={open} onClose={() => setOpen(null)} />}
+      {open && <Detail pack={open} from={from} onClose={() => setOpen(null)} />}
     </section>
   );
 }
