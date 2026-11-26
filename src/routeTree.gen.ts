@@ -75,12 +75,7 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
-    | '/drop'
-    | '/drop-unlock'
-    | '/c/$slug'
-    | '/d/$slug'
-    | '/t/$slug'
+    '/' | '/drop' | '/drop-unlock' | '/c/$slug' | '/d/$slug' | '/t/$slug'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/drop' | '/drop-unlock' | '/c/$slug' | '/d/$slug' | '/t/$slug'
   id:
